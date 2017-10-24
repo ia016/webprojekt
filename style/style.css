@@ -1,19 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css?family=Cedarville+Cursive|Parisienne');
 body, html {
     font-family: Helvetica;
     font-weight: lighter;
 }
 h1 {
-    font-family: "Cedarville Cursive" ;
+    font-family: "Cedarville Cursive";
     text-align: center;
     position: relative;
     text-indent: 2em;
     font-size: 3em;
+    margin-bottom: -18px;
+
 }
 li{
     list-style: none;
     display: inline;
     padding-right: 10px;
+    font-family: Helvetica;
 }
 ul {
     text-align: center;
@@ -21,8 +24,23 @@ ul {
 li a {
     text-decoration: none;
     color: black;
+    letter-spacing: 0.3em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 li a:hover {
     color: #202020;
     border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.Oberueberschirft {
+    font-family: Helvetica;
+    font-weight: lighter;
+    text-align: center;
+    position: relative;
+    text-indent: 2em;
+    font-size: 2em;
+    letter-spacing: 0.3em;
+}
+img {
+padding-left: 5px;
 }
