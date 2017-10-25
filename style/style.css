@@ -3,7 +3,7 @@ body, html {
     font-family: Helvetica;
     font-weight: lighter;
 }
-h1 {
+h1.mylovelyhome{
     font-family: "Cedarville Cursive";
     text-align: center;
     position: relative;
@@ -18,7 +18,7 @@ li{
     padding-right: 10px;
     font-family: Helvetica;
 }
-ul {
+ul.mainnavigation {
     text-align: center;
 }
 li a {
@@ -41,6 +41,8 @@ li a:hover {
     font-size: 2em;
     letter-spacing: 0.3em;
 }
-img {
-padding-left: 5px;
+IMG.startseitenbild {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
