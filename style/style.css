@@ -53,4 +53,15 @@ IMG.startseitenbild {
     height: auto;
     margin: 0 auto;
 }
-
+.newarrivals {
+    width: 24.5%;
+    height: auto;
+    margin: 30px 0 30px 0;
+}
+IMG.footer {
+    margin: 10px 0 10px 10px;
+}
+IMG.footer:hover {
+    color: #202020;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}

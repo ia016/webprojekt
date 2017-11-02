@@ -30,13 +30,17 @@ include "startseite/startseite.php";
 <footer>
     <hr/>
     <ul class="mainnavigation">
-        <li><a href="index.php?page=account&action=logout">IMPRINT</a></li>
-        <li><a href="index.php?page=account&action=ansehen">CONTACT</a></li>
-        <li><a href="index.php?page=account&action=aendern">ABOUT US</a></li>
-        <li><a href="index.php?page=account&action=anzeigen">FAQ</a></li>
+        <li><a href="index.php?page=account&action=imprint">IMPRINT</a></li>
+        <li><a href="index.php?page=account&action=contact">CONTACT</a></li>
+        <li><a href="index.php?page=account&action=aboutus">ABOUT US</a></li>
+        <li><a href="index.php?page=account&action=faq">FAQ</a></li>
         </li>
     </ul>
     <hr/>
+
+    <img class="footer" src="images/shopping-bag.png" width="25" height="25" alt="instagram">
+    <img class="footer" src="images/shopping-bag.png" width="25" height="25" alt="facebook">
+
 </footer>
 
 
