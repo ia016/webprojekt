@@ -13,6 +13,7 @@
 <div class="container">
 <h1 class="mylovelyhome">my lovely home</h1>
 <hr/>
+
 <ul class="mainnavigation">
     <li><a href="index.php?page=account&action=logout">HOME DECOR</a></li>
     <li><a href="index.php?page=account&action=ansehen">HOME TEXTILES</a></li>
@@ -38,12 +39,9 @@ include "startseite/startseite.php";
     </ul>
     <hr/>
 
-    <img class="footer" src="images/shopping-bag.png" width="25" height="25" alt="instagram">
-    <img class="footer" src="images/shopping-bag.png" width="25" height="25" alt="facebook">
-
+    <img class="footer" src="../images/instagram.png" width="25" height="25" alt="instagram">
+    <img class="footer" src="../images/facebook-letter-logo.png" width="25" height="25" alt="facebook">
 </footer>
-
-
 
 </div>
 </body>

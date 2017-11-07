@@ -60,8 +60,19 @@ IMG.startseitenbild {
 }
 IMG.footer {
     margin: 10px 0 10px 10px;
+    test-align: center;
 }
 IMG.footer:hover {
     color: #202020;
     border-bottom: 1px solid rgba(0,0,0,0.3);
 }
+.theteamleft {
+    width: 47.5%;
+    height: auto
+    margin: 5px 5px 5px 5px;
+}
+ .theteamright {
+     width: 47.5%;
+     height: auto;
+     float: right;
+ }
