@@ -60,7 +60,7 @@ IMG.startseitenbild {
 }
 IMG.footer {
     margin: 10px 0 10px 10px;
-    test-align: center;
+    text-align: center;
 }
 IMG.footer:hover {
     color: #202020;
