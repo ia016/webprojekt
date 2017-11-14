@@ -39,8 +39,8 @@ include "startseite/startseite.php";
     </ul>
     <hr/>
 
-    <img class="footer" src="/images/instagram.png" width="25" height="25" alt="instagram">
-    <img class="footer" src="/images/facebook-letter-logo.png" width="25" height="25" alt="facebook">
+    <img class="footer" src="images/instagram.png" width="25" height="25" alt="instagram">
+    <img class="footer" src="images/facebook-letter-logo.png" width="25" height="25" alt="facebook">
 </footer>
 
 </div>
