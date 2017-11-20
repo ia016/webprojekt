@@ -2,14 +2,13 @@
     include("../inc/uebergabe.php");
 
 session_start();
-$pdo = new PDO('mysql:host=localhost;dbname=u-ia016', 'ia016', 'aShouj5To8');
 
 if(isset($_GET['login'])) {
-    $login = $_POST['login'];
+    $name = $_POST['name'];
     $password = $_POST['password'];
 
-    $statement = $pdo->prepare("SELECT * FROM user WHERE login = :login");
-    $result = $statement->execute(array('login' => $login));
+    $statement = $pdo->prepare("SELECT * FROM user WHERE name = :name");
+    $result = $statement->execute(array('name' => $name));
     $user = $statement->fetch();
 
     //Überprüfung des Passworts
@@ -37,10 +36,10 @@ if(isset($errorMessage)) {
 
 <form action="?login=1" method="post">
     Name:<br>
-    <input type="email" size="40" maxlength="250" name="email"><br><br>
+    <input type="name" size="40" maxlength="250" name="name"><br><br>
 
     Dein Passwort:<br>
-    <input type="password" size="40"  maxlength="250" name="passwort"><br>
+    <input type="password" size="40"  maxlength="250" name="password"><br>
 
     <input type="submit" value="Abschicken">
 </form>
