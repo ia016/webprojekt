@@ -8,7 +8,8 @@
         </li>
     </ul>
     <hr/>
-
-    <img class="footer" src="/hdm/webprojekt/images/instagram.png" width="25" height="25" alt="instagram">
-    <img class="footer" src="/hdm/webprojekt/images/facebook-letter-logo.png" width="25" height="25" alt="facebook">
+    <div class="social-media">
+        <img class="footer" src="images/instagram.png" width="25" height="25" alt="instagram">
+        <img class="footer" src="images/facebook-letter-logo.png" width="25" height="25" alt="facebook">
+    </div>
 </footer>

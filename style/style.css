@@ -84,3 +84,7 @@ IMG.footer:hover {
      height: auto;
      background-color: #517a73
  }
+ footer .social-media {
+     display: flex;
+
+ }
