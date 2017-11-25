@@ -26,6 +26,13 @@ include "inc/header.php";
     include("inc/category.php");
     } else if (isset($_GET["product"])) {
             include("inc/product.php");
+    } else if(isset($_GET["page"])) {
+
+        if ($_GET["page"] == "shoppingbag") {
+            include("shoppingbag/shoppingbag.php");
+        }
+
+
     } else {
         include("inc/productdetail.php");
     }

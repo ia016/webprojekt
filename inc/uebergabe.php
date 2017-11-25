@@ -10,4 +10,9 @@ catch (PDOException $p) {
     print_r($p);
     die();
 }
+
+session_start();
+$sessionId = session_id();
+
+
 ?>
