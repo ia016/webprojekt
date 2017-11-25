@@ -21,24 +21,15 @@ include("inc/uebergabe.php");
 include "inc/header.php";
 ?>
 <div class="container">
-
-        <?php
-            if (isset($_GET["category"])) {
-
-        include("inc/category.php");
-
-
-        } else if (isset($_GET["product"])) {
-
-                include("inc/product.php");
-
-
-            } else {
-                include("inc/productdetail.php");
-
-            }
-    ?>
-
+    <?php
+        if (isset($_GET["category"])) {
+    include("inc/category.php");
+    } else if (isset($_GET["product"])) {
+            include("inc/product.php");
+    } else {
+        include("inc/productdetail.php");
+    }
+?>
 </div>
 <?php
 include "inc/footer.php";
