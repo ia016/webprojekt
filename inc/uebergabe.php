@@ -14,5 +14,23 @@ catch (PDOException $p) {
 session_start();
 $sessionId = session_id();
 
+if (isset($_GET["action"])) {
+
+    if ($_GET["action"] == "add-to-bag") {
+
+        $amount = $_POST["amount"];
+        $productId = $_GET["productid"];
+
+        $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
+        $statement->execute(
+            array($productId, $amount, $sessionId)
+        );
+        header("Location: ?page=shoppingbag");
+
+    }
+
+}
+
+
 
 ?>
