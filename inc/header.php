@@ -13,6 +13,6 @@
             echo "<li><a href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>";
         }
     ?>
-    <li><a href="index.php?page=account&action=anzeigen"><img src="images/shopping-bag.png" width="25" height="25" alt="Shopping bag"></a></li>
+    <li><a href="index.php?page=shoppingbag"><img src="images/shopping-bag.png" width="25" height="25" alt="Shopping bag"></a></li>
 </ul>
 <hr/>

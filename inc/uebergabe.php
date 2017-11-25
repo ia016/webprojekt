@@ -11,7 +11,8 @@ catch (PDOException $p) {
     die();
 }
 
-
+session_start();
+$sessionId = session_id();
 
 if (isset($_GET["action"])) {
 
@@ -19,9 +20,6 @@ if (isset($_GET["action"])) {
 
         $amount = $_POST["amount"];
         $productId = $_GET["productid"];
-
-        session_start();
-        $sessionId = session_id();
 
         $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
         $statement->execute(
@@ -32,5 +30,7 @@ if (isset($_GET["action"])) {
     }
 
 }
+
+
 
 ?>
