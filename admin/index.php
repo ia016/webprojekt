@@ -1,5 +1,7 @@
 <?php
-    include("../inc/uebergabe.php");
+   include("../inc/uebergabe.php");
+   include "../inc/header.php";
+
 
 session_start();
 
@@ -7,8 +9,8 @@ if(isset($_GET['login'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
 
-    $statement = $pdo->prepare("SELECT * FROM user WHERE name = :name");
-    $result = $statement->execute(array('name' => $name));
+    $statement = $pdo->prepare("SELECT * FROM users WHERE name = :name");
+    $statement->execute(array('name' => $name));
     $user = $statement->fetch();
 
     //Überprüfung des Passworts
@@ -35,16 +37,20 @@ if(isset($errorMessage)) {
 ?>
 
 <form action="?login=1" method="post">
-    Name:<br>
+    name:<br>
     <input type="name" size="40" maxlength="250" name="name"><br><br>
 
-    Dein Passwort:<br>
+    Password:<br>
     <input type="password" size="40"  maxlength="250" name="password"><br>
 
     <input type="submit" value="Abschicken">
 </form>
 </body>
 </html>
+
+<?php
+include "../inc/footer.php";
+?>
 
 <!--<!DOCTYPE html>
 <html lang="en">
@@ -59,7 +65,7 @@ if(isset($errorMessage)) {
 </head>
 <body>
 <?php
-include "../inc/header.php";
+
 ?>
 <div class="container">
 
@@ -118,9 +124,6 @@ include "../inc/header.php";
         <input type="submit" value="Send">
     </form>
 </div>
-<?php
-include "../inc/footer.php";
-?>
 
 </body>
 </html>

@@ -9,7 +9,10 @@ h1.mylovelyhome{
     position: relative;
     font-size: 3em;
     margin-bottom: -18px;
-
+}
+.mylovelyhome a {
+    text-decoration: none;
+    color: black;
 }
 li{
     list-style: none;
@@ -19,6 +22,7 @@ li{
 }
 ul.mainnavigation {
     text-align: center;
+    text-transform: uppercase;
 }
 li a {
     text-decoration: none;
