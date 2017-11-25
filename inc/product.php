@@ -25,6 +25,7 @@
     ));
     $details = $prepared->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
 
+
     echo "<ul>";
     foreach ($details AS $detail) {
         echo $detail["detail"];
@@ -44,3 +45,9 @@
         echo "<img width=\"200\" src=\"images/products/".$image["filename"]."\" />";
     }
 
+    ?>
+
+    <form method="post" action="?action=add-to-bag&productid=<?=$product["id"];?>">
+        <input type="number" name="amount" min="1" value="1" />
+        <input type="submit" value="add to cart" />
+    </form>
