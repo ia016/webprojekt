@@ -8,6 +8,7 @@
         $prepared->execute();
         $categories = $prepared->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
 
+
         foreach($categories as $category) {
             echo "<li><a href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>";
         }

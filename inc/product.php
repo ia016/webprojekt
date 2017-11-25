@@ -29,4 +29,18 @@
     foreach ($details AS $detail) {
         echo $detail["detail"];
     }
-echo "</ul>";
+    echo "</ul>";
+
+
+    $sql = 'SELECT * FROM productimages WHERE productid = ?';
+    $prepared = $pdo->prepare($sql);
+
+    $prepared->execute(array(
+        $_GET["product"]
+    ));
+    $images = $prepared->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
+
+    foreach ($images AS $image) {
+        echo "<img width=\"200\" src=\"images/products/".$image["filename"]."\" />";
+    }
+
