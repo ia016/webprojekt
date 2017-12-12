@@ -23,7 +23,7 @@ include "inc/header.php";
 <div class="container">
     <?php
         if (isset($_GET["category"])) {
-    include("inc/category.php");
+        include("inc/category.php");
     } else if (isset($_GET["product"])) {
             include("inc/product.php");
     } else if(isset($_GET["page"])) {
@@ -34,7 +34,7 @@ include "inc/header.php";
 
 
     } else {
-        include("inc/productdetail.php");
+        include("startseite/startseite.php");
     }
 ?>
 </div>

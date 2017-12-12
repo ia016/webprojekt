@@ -6,19 +6,21 @@
 session_start();
 
 if(isset($_GET['login'])) {
-    $name = $_POST['name'];
     $password = $_POST['password'];
 
-    $statement = $pdo->prepare("SELECT * FROM users WHERE name = :name");
-    $statement->execute(array('name' => $name));
-    $user = $statement->fetch();
+    $sql = "SELECT * FROM users WHERE name = ?";
+    $prepared = $pdo->prepare($sql);
+    $prepared->execute(array(
+        $_POST['name']
+    ));
+    $user = $prepared->fetch();
 
     //Überprüfung des Passworts
     if ($user !== false && password_verify($password, $user['password'])) {
         $_SESSION['userid'] = $user['id'];
         die('Login erfolgreich. Weiter zu <a href="geheim.php">internen Bereich</a>');
     } else {
-        $errorMessage = "E-Mail oder Passwort war ungültig<br>";
+        $errorMessage = "Name oder Passwort war ungültig<br>";
     }
 
 }
