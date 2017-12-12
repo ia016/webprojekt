@@ -24,9 +24,9 @@
         echo "<td>".$product["category_name"]."</td>";
         echo "<td>".$product["title"]."</td>";
         echo "<td>".$product["description"]."</td>";
-        echo "<td>".$product["price"]. " €"."</td>";
+        echo "<td>".money_format('%.2n', $product["price"])."€"."</td>";
         echo "</tr>";
         }
-        echo "<tr><td>Summe</td>/td><td align='right' colspan='4'>".$totalSum[0]["totalSum"]." €"."</td></tr>"
+        echo "<tr><td>Summe</td><td align='right' colspan='4'>".money_format('%.2n', $totalSum[0]["totalSum"])." €"."</td></tr>"
     ?>
 </table>
