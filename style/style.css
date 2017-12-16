@@ -3,6 +3,13 @@ body, html {
     font-family: Helvetica;
     font-weight: lighter;
 }
+
+.order-shopping-bag {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 0 !important;
+}
+
 h1.mylovelyhome{
     font-family: "Cedarville Cursive";
     text-align: center;
