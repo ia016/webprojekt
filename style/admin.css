@@ -1,0 +1,12 @@
+
+#login {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #CCC;
+    border-radius: 9px;
+    margin: 40px auto;
+}
+
+#login .error {
+    color: red;
+}
