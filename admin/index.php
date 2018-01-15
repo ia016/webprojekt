@@ -5,7 +5,7 @@ include("../inc/uebergabe.php");
 // user loggt sich ein: Form wird abgesendet (1)
 if (isset($_GET['login'])) {
 
-    // Ruft die Login Form auf mit login=1 --> Daten, die im Formular eingegeben werden mit GET holen (2)
+    // Ruft die Login Form auf mit login=1 (GET)--> Daten, die im Formular eingegeben werden mit POST holen (2)
     $name = $_POST["name"];
     $password = $_POST['password'];
 
@@ -28,7 +28,7 @@ if (isset($_GET['login'])) {
             session_id(),
             $user["name"]
         ));
-        // wenn login erfolgreich: rederect user (6)
+        // wenn login erfolgreich (6)
         header("Location: ./");
     }
 
@@ -40,7 +40,7 @@ if (isset($_GET["logout"])) {
     header("Location: ./");
 }
 
-// immer prüfen, ob der User eingeloggt ist
+// immer prüfen, ob der User eingeloggt ist. standardannahme: user ist nicht eingeloggt
 $loggedin = false;
 
 $sql = "SELECT * FROM users WHERE session = ?";
