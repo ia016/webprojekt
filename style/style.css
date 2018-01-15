@@ -17,31 +17,37 @@ h1.mylovelyhome{
     font-size: 3em;
     margin-bottom: -18px;
 }
+
 .mylovelyhome a, .mylovelyhome a:hover {
     text-decoration: none;
     color: black;
 }
-li{
+
+#header li{
     list-style: none;
     display: inline;
     padding-right: 10px;
     font-family: Helvetica;
 }
-ul.mainnavigation {
+
+#header ul.mainnavigation {
     text-align: center;
     text-transform: uppercase;
 }
-li a {
+
+#header li a {
     text-decoration: none;
     color: black;
     letter-spacing: 0.3em;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
-li a:hover {
+
+#header li a:hover {
     color: #202020;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
+
 .Oberueberschirft {
     font-family: Helvetica;
     font-weight: lighter;
@@ -51,6 +57,7 @@ li a:hover {
     font-size: 2em;
     letter-spacing: 0.3em;
 }
+
 IMG.startseitenbild {
     width: 100%;
     height: auto;
@@ -63,21 +70,25 @@ IMG.startseitenbild {
     height: auto;
     margin: 0 auto;
 }
+
 .newarrivals {
     width: 24.5%;
     height: auto;
     margin: 30px 0 30px 0;
 }
+
 IMG.footer {
     margin: 10px 0 10px 10px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
 IMG.footer:hover {
     color: #202020;
     border-bottom: 1px solid rgba(0,0,0,0.3);
 }
+
 .theteamleft {
     width: 47.5%;
     height: auto;
@@ -85,6 +96,7 @@ IMG.footer:hover {
     display:block;
     margin: 10px 5px 10px 5px;
 }
+
  .theteamright {
      width: 47.5%;
      height: auto;

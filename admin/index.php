@@ -54,6 +54,15 @@ if ($user) {
     $loggedin = true;
 }
 
+
+//
+if (isset($_GET["manage"])) {
+    $manage = $_GET["manage"];
+} else {
+    $manage = "orders";
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -101,7 +110,88 @@ if ($user) {
 
 <?php else : ?>
 
-    <a href="?logout=1">logout (<?=$user["name"]; ?>)</a>
+    <div id="main">
+        <div id="navigation">
+            <ul>
+                <li><a href="?manage=categories">Kategorien</a></li>
+                <li><a href="?manage=products">Produkte</a></li>
+                <li><a href="?manage=orders">Bestellungen</a></li>
+                <li><a href="?manage=users">Benutzer</a></li>
+                <li><a href="?manage=discount">Rabattcodes</a></li>
+                <li><a href="?logout=1">logout (<?=$user["name"]; ?>)</a></li>
+            </ul>
+        </div>
+        <div id="content">
+
+            <?php if ($manage == "categories") : ?>
+                <h2>Kategorien</h2>
+
+                <ul>
+                    <?php
+                    $sql = 'SELECT * FROM categories ORDER BY id';
+                    $prepared = $pdo->prepare($sql);
+                    $prepared->execute();
+                    $categories = $prepared->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach($categories as $category) {
+                        echo "<ul>".$category["name"]."</ul>";
+                    }
+                    ?>
+                </ul>
+
+
+            <?php elseif ($manage == "products") : ?>
+                <h2>Produkte</h2>
+
+                <ul>
+                    <?php
+                    $sql = 'SELECT * FROM products ORDER BY id';
+                    $prepared = $pdo->prepare($sql);
+                    $prepared->execute();
+                    $categories = $prepared->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach($categories as $product) {
+                        echo "<ul>".$product["name"]."</ul>";
+                    }
+                    ?>
+                </ul>
+
+            <?php elseif ($manage == "orders") : ?>
+                <h2>Bestellungen</h2>
+
+                <ul>
+                    <?php
+                    $sql = 'SELECT * FROM shoppingbag ORDER BY id';
+                    $prepared = $pdo->prepare($sql);
+                    $prepared->execute();
+                    $orders = $prepared->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach($orders as $order) {
+                        echo "<ul>".$order["id"]."</ul>";
+                    }
+                    ?>
+                </ul>
+
+            <?php elseif ($manage == "users") : ?>
+                <h2>Benutzer</h2>
+
+                <ul>
+                    <?php
+                    $sql = 'SELECT * FROM users ORDER BY id';
+                    $prepared = $pdo->prepare($sql);
+                    $prepared->execute();
+                    $users = $prepared->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach($users as $user) {
+                        echo "<ul>".$user["name"]."</ul>";
+                    }
+                    ?>
+                </ul>
+            <?php endif; ?>
+
+        </div>
+    </div>
+
 
 <?php endif; ?>
 
