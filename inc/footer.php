@@ -1,6 +1,6 @@
-<footer>
+<footer id="footer" class="mx-auto">
     <hr/>
-    <ul class="mainnavigation">
+    <ul id="mainnavigation" class="text-center p-0">
         <li><a href="index.php?page=account&action=imprint">IMPRINT</a></li>
         <li><a href="index.php?page=account&action=contact">CONTACT</a></li>
         <li><a href="index.php?page=account&action=aboutus">ABOUT US</a></li>

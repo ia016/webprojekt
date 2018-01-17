@@ -2,12 +2,13 @@
 
 <div class="row justify-content-start">
 
-    <div class="col-8">
+    <div class="col-12 col-md-8">
         <div class="card col-12">
             <div class="card-body row justify-content-between">
                 <h4 class="card-title">Coupon Code</h4>
-                <i data-toggle="collapse" href="#collapseCoupon" aria-expanded="false" aria-controls="collapseCoupon"
-                   class="fa fa-angle-down fa-3x"></i>
+                <a data-toggle="collapse" href="#collapseCoupon" aria-expanded="false" aria-controls="collapseCoupon">
+                    <i class="fa fa-angle-down fa-3x"></i>
+                </a>
             </div>
             <div class="collapse col-auto" id="collapseCoupon">
                 <div class="form-group">
@@ -115,14 +116,14 @@
 
                 <div class="col-12">
                     <div class="mt-3 row justify-content-around">
-                        <div class="col-3">
+                        <div class="col-9 order-2 col-sm-3 order-sm-1">
                             <p class="h6">KOSTENLOS</p>
                         </div>
-                        <div class="col-8">
-                            <div class="font-weight-bold">Standardversand</div>
-                            <div class="mt-3 text-muted">TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</div>
+                        <div class="col-12 order-1 col-sm-8 order-sm-2">
+                            <div class="font-weight-bold">Standard Delivery</div>
+                            <div class="mt-0 mt-sm-3 mb-3 mb-sm-0 text-muted">Delivery in 3-4 workdays</div>
                         </div>
-                        <div class="my-auto col-1">
+                        <div class="my-auto col-3 order-3 col-sm-1 order-sm-3">
                             <input type="radio" name="distributionType">
                         </div>
                     </div>
@@ -130,14 +131,14 @@
                     <hr>
 
                     <div class="mt-5 row justify-content-around">
-                        <div class="col-3">
+                        <div class="col-9 order-2 col-sm-3 oder-sm-1">
                             <p class="h6">5,00 €</p>
                         </div>
-                        <div class="col-8">
+                        <div class="col-12 order-1 col-sm-8 order-sm-2">
                             <div class="font-weight-bold">Express</div>
-                            <div class="mt-3 text-muted">TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</div>
+                            <div class="mt-0 mt-sm-3 mb-3 mb-sm-0 text-muted">Delivery in 2 workdays</div>
                         </div>
-                        <div class="my-auto col-1">
+                        <div class="my-auto col-3 order-3 col-sm-1 order-sm-3">
                             <input type="radio" name="distributionType">
                         </div>
                         <hr>
@@ -146,14 +147,13 @@
                     <hr>
 
                     <div class="mt-5 row justify-content-around">
-                        <div class="col-3">
+                        <div class="col-9 order-2 col-sm-3 oder-sm-1">
                             <p class="h6">10,00 €</p>
                         </div>
-                        <div class="col-8">
-                            <div class="font-weight-bold">Lieferung am nächsten Werktag</div>
-                            <div class="mt-3 text-muted">TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</div>
+                        <div class="col-12 order-1 col-sm-8 order-sm-2">
+                            <div class="font-weight-bold">Delivery tomorrow</div>
                         </div>
-                        <div class="my-auto col-1">
+                        <div class="my-auto col-3 order-3 col-sm-1 order-sm-3">
                             <input type="radio" name="distributionType">
                         </div>
                         <hr>
@@ -180,7 +180,7 @@
         </div>
     </div>
 
-    <div class="col-4" style="padding-left: 0">
+    <div class="d-none d-md-block col-4" style="padding-left: 0">
         <div class="card col-12" style="position: sticky; position: -webkit-sticky; top: 0;">
             <div class="card-body row justify-content-between">
                 <h1>HALLO</h1>
