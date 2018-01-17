@@ -179,7 +179,7 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
                     $categories = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
                     foreach($categories as $category) {
-                        echo "<ul>".$category["name"]." <a href=\"?manage=categories&deletecategory=".$category["id"]."\">deleteq11</a> <a href=\"?manage=categories&editcategory=".$category["id"]."\">edit</a></ul>";
+                        echo "<ul>".$category["name"]." <a href=\"?manage=categories&deletecategory=".$category["id"]."\">delete</a> <a href=\"?manage=categories&editcategory=".$category["id"]."\">edit</a></ul>";
                     }
                     ?>
                 </ul>
