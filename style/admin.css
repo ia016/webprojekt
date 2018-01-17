@@ -1,0 +1,39 @@
+
+#login {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #CCC;
+    border-radius: 9px;
+    margin: 40px auto;
+}
+
+#login .error {
+    color: red;
+}
+
+#main {
+    display: flex;
+}
+
+#navigation {
+    width: 20%;
+    padding: 20px;
+}
+
+#navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#navigation ul li a {
+    display: block;
+    padding: 5px 0;
+    border-bottom: 1px dotted #ccc;
+    color: black;
+}
+
+#content {
+    width: 80%;
+}
+
