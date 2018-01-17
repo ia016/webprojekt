@@ -1,10 +1,11 @@
 <?php
-   include("../inc/uebergabe.php");
+
    include "../inc/header.php";
 
 
 session_start();
 
+include("../inc/uebergabe.php");
 if(isset($_GET['login'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
