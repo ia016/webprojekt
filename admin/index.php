@@ -55,12 +55,57 @@ if ($user) {
 }
 
 
-//
+// order-seite als erstes anzeigen
 if (isset($_GET["manage"])) {
     $manage = $_GET["manage"];
 } else {
-    $manage = "orders";
+    header("Location: ?manage=orders");
 }
+
+
+// Kategorien speichern
+if (isset($_GET["addcategory"])) {
+    $name = $_POST["name"];
+    $statement = $pdo->prepare("INSERT INTO categories (name) VALUES (?)");
+    $statement->execute(
+        array($name)
+    );
+    header("Location: ?manage=categories");
+}
+
+// Kategorie löschen
+if (isset($_GET["deletecategory"])) {
+    $id = $_GET["deletecategory"];
+    $statement = $pdo->prepare("DELETE FROM categories WHERE id = ?");
+    $statement->execute(
+        array($id)
+    );
+    header("Location: ?manage=categories");
+}
+
+// Kategorie zum Ändern holen
+if (isset($_GET["editcategory"])) {
+    $id = $_GET["editcategory"];
+    $sql = "SELECT * FROM categories WHERE id = ?";
+    $prepared = $pdo->prepare($sql);
+    $prepared->execute(array(
+        $id
+    ));
+    $selectedCategory = $prepared->fetch(PDO::FETCH_ASSOC);
+}
+
+// Kategorie ändern
+if (isset($_GET["editcategory"]) && !empty($_POST)) {
+    $name = $_POST["name"];
+    $id = $_GET["editcategory"];
+    $statement = $pdo->prepare("UPDATE categories SET name = ? WHERE id = ?");
+    $statement->execute(
+        array($name, $id)
+    );
+    header("Location: ?manage=categories");
+}
+
+
 
 
 ?>
@@ -134,11 +179,22 @@ if (isset($_GET["manage"])) {
                     $categories = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
                     foreach($categories as $category) {
-                        echo "<ul>".$category["name"]."</ul>";
+                        echo "<ul>".$category["name"]." <a href=\"?manage=categories&deletecategory=".$category["id"]."\">deleteq11</a> <a href=\"?manage=categories&editcategory=".$category["id"]."\">edit</a></ul>";
                     }
                     ?>
                 </ul>
 
+                <?php if(!$_GET["editcategory"]) : ?>
+                <form action="?manage=categories&addcategory=1" method="post">
+                    <h4>Kategorie hinzufügen</h4>
+                    <input type="text" name="name" /><input type="submit" value="speichern" />
+                </form>
+                <?php else : ?>
+                <form action="?manage=categories&editcategory=<?=$selectedCategory["id"];?>" method="post">
+                    <h4>Kategorie bearbeiten</h4>
+                    <input type="text" name="name" value="<?=$selectedCategory["name"];?>" /><input type="submit" value="speichern" />
+                </form>
+                    <?php endif; ?>
 
             <?php elseif ($manage == "products") : ?>
                 <h2>Produkte</h2>
@@ -148,9 +204,9 @@ if (isset($_GET["manage"])) {
                     $sql = 'SELECT * FROM products ORDER BY id';
                     $prepared = $pdo->prepare($sql);
                     $prepared->execute();
-                    $categories = $prepared->fetchAll(PDO::FETCH_ASSOC);
+                    $products = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
-                    foreach($categories as $product) {
+                    foreach($products as $product) {
                         echo "<ul>".$product["name"]."</ul>";
                     }
                     ?>

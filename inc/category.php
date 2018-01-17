@@ -10,6 +10,10 @@ $products = $prepared->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausfüh
 
 echo "<ul>";
 foreach ($products as $product) {
-    echo "<li><a href=\"?product=" . $product["id"] . "\">" . $product["name"] . "</a></li>";
+    echo "<li>";
+    echo "<a href=\"?product=" . $product["id"] . "\">" . $product["name"] . "</a>";
+    echo "<a href=\"?product=" . $product["id"] . "\"><img width=\"200\" src=\"images/products/".$product["image"]."\" /></a>";
+
+    echo "</li>";
 }
 echo "</ul>";
