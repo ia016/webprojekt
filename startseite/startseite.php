@@ -25,7 +25,7 @@
     </a>
 </div>
 
-<div class="mt-5 Oberueberschirft">NEW ARRIVALS</div>
+<div class="mt-5 text-center Oberueberschirft">NEW ARRIVALS</div>
 <div class="row justify-content-center">
     <?php
     $sql = 'SELECT id, name, price, image FROM products ORDER BY id DESC LIMIT 4';

@@ -46,9 +46,6 @@ h1.mylovelyhome{
 .Oberueberschirft {
     font-family: Helvetica;
     font-weight: lighter;
-    text-align: center;
-    position: relative;
-    text-indent: 2em;
     font-size: 2em;
     letter-spacing: 0.3em;
 }
