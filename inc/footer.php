@@ -9,7 +9,6 @@
     </ul>
     <hr/>
     <div class="social-media">
-        <img class="footer" src="images/instagram.png" width="25" height="25" alt="instagram">
-        <img class="footer" src="images/facebook-letter-logo.png" width="25" height="25" alt="facebook">
+      <a href="https://www.instagram.com/mylovelyhome.hdm/" target="_blank"> <img class="footer" src="images/instagram.png" width="25" height="25" alt="instagram"></a>
     </div>
 </footer>

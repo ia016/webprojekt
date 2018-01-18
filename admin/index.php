@@ -105,7 +105,58 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
     header("Location: ?manage=categories");
 }
 
+// Kategorien holen (fürs Hinzufügen von Produkten)
+$sql = "SELECT * FROM categories";
+$prepared = $pdo->prepare($sql);
+$prepared->execute(array(
+    $id
+));
+$allCategories = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
+// Produkt speichern
+if (isset($_GET["addproduct"])) {
+    $name = $_POST["name"];
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $categoryid = $_POST["category"];
+    $price = $_POST["price"];
+    $ean = $_POST["ean"];
+
+    // bild hochladen
+    $foto = "";
+    if ($_FILES["foto"]["name"]  !== "") {
+        move_uploaded_file($_FILES['foto']['tmp_name'],  "./../images/products/".$_FILES["foto"]["name"]);
+        $foto = $_FILES["foto"]["name"];
+    }
+
+    // Produkt speichern
+    $statement = $pdo->prepare("INSERT INTO products (name, title, description, categoryid, price, image, ean) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $statement->execute(
+        array($name, $title, $description, $categoryid, $price, $foto, $ean)
+    );
+    header("Location: ?manage=products");
+}
+
+// Produkt löschen
+if (isset($_GET["deleteproduct"])) {
+    $id = $_GET["deleteproduct"];
+    $statement = $pdo->prepare("DELETE FROM products WHERE id = ?");
+    $statement->execute(
+        array($id)
+    );
+    header("Location: ?manage=products");
+}
+
+// Produkt zum editieren holen
+if (isset($_GET["editproduct"])) {
+    $id = $_GET["editproduct"];
+    $sql = "SELECT * FROM products WHERE id = ?";
+    $prepared = $pdo->prepare($sql);
+    $prepared->execute(array(
+        $id
+    ));
+    $selectedProduct = $prepared->fetch(PDO::FETCH_ASSOC);
+}
 
 
 ?>
@@ -194,7 +245,7 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
                     <h4>Kategorie bearbeiten</h4>
                     <input type="text" name="name" value="<?=$selectedCategory["name"];?>" /><input type="submit" value="speichern" />
                 </form>
-                    <?php endif; ?>
+                <?php endif; ?>
 
             <?php elseif ($manage == "products") : ?>
                 <h2>Produkte</h2>
@@ -207,10 +258,64 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
                     $products = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
                     foreach($products as $product) {
-                        echo "<ul>".$product["name"]."</ul>";
+                        echo "<ul>".$product["name"]." <a href=\"?manage=products&deleteproduct=".$product["id"]."\">delete</a> <a href=\"?manage=products&editproduct=".$product["id"]."\">edit</a></ul>";
                     }
                     ?>
                 </ul>
+
+                <?php if(!$_GET["editproduct"]) : ?>
+                <form action="?manage=products&addproduct=1" method="post" enctype="multipart/form-data">
+                    Produktname:<br />
+                    <input type="text" name="name" /><br />
+                    Titel:<br />
+                    <input type="text" name="title" /><br />
+                    Beschreibung:<br />
+                    <textarea name="description"></textarea><br />
+                    Kategorie:<br />
+                    <select name="category">
+                        <?php
+                            foreach($allCategories as $category) {
+                                echo "<option value=\"".$category["id"]."\">".$category["name"]."</option>";
+                            }
+                        ?>
+                    </select><br />
+                    Preis:<br />
+                    <input type="text" name="price" /><br />
+                    Foto:<br />
+                    <input type="file" name="foto" /><br />
+                    EAN-Code<br />
+                    <input type="text" name="ean" /><br />
+                    <input type="submit" value="speichern" />
+                </form>
+                <?php else : ?>
+                <form action="?manage=products&addproduct=1" method="post" enctype="multipart/form-data">
+                    Produktname:<br />
+                    <input type="text" name="name" value="<?=$selectedProduct["name"];?>" /><br />
+                    Titel:<br />
+                    <input type="text" name="title" value="<?=$selectedProduct["title"];?>"/><br />
+                    Beschreibung:<br />
+                    <textarea name="description"><?= $selectedProduct["name"]; ?></textarea><br />
+                    Kategorie:<br />
+                    <select name="category">
+                        <?php
+                        foreach($allCategories as $category) {
+                            if ($selectedProduct["categoryid"] == $category["id"]) {
+                               echo "<option selected=\"selected\" value=\"" . $category["id"] . "\">" . $category["name"] . "</option>";
+                            } else {
+                                echo "<option value=\"" . $category["id"] . "\">" . $category["name"] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select><br />
+                    Preis:<br />
+                    <input type="text" name="price" value="<?= $selectedProduct["price"]; ?>" /><br />
+                    Foto:<br />
+                    <input type="file" name="foto" value="<?= $selectedProduct["image"]; ?>" /><br />
+                    EAN-Code<br />
+                    <input type="text" name="ean" value="<?= $selectedProduct["ean"]; ?>"  /><br />
+                    <input type="submit" value="speichern" />
+                </form>
+                <?php endif; ?>
 
             <?php elseif ($manage == "orders") : ?>
                 <h2>Bestellungen</h2>
@@ -254,4 +359,3 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
 
 </body>
 </html>
-
