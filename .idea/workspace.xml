@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df2d7fcf-f639-4ac8-9f58-b3468f9df146" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/images/slider2.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -555,11 +554,18 @@
       <option name="project" value="LOCAL" />
       <updated>1516215038219</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Slider JPG Größe angepasst">
+      <created>1516551233744</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1516551233744</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52839000" />
+    <option name="totallyTimeSpent" value="52859000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -648,7 +654,8 @@
     <MESSAGE value="order seite angefangen" />
     <MESSAGE value="Kategorien ändern, umbenennen und löschen&#10;Fotos im Shop anzeigen" />
     <MESSAGE value="Rechtschreibfehler behoben" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rechtschreibfehler behoben" />
+    <MESSAGE value="Slider JPG Größe angepasst" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slider JPG Größe angepasst" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
