@@ -27,7 +27,6 @@ include "inc/header.php";
     } else if (isset($_GET["product"])) {
             include("inc/product.php");
     } else if(isset($_GET["page"])) {
-
         if ($_GET["page"] == "shoppingbag") {
             include("shoppingbag/shoppingbag.php");
         } else if ($_GET["page"] == "order") {

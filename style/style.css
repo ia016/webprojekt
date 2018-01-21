@@ -32,13 +32,10 @@ h1.mylovelyhome{
 
 #header li a, #footer li a {
     text-decoration: none;
+    color: black;
     letter-spacing: 0.3em;
     padding-left: 0.5em;
     padding-right: 0.5em;
-}
-
-#footer li a {
-    color: black;
 }
 
 #header li a:hover, #footer li a:hover {
@@ -96,12 +93,59 @@ IMG.footer:hover {
      width: 100% !important; /*View Width*/
  }
 
+.img-80 {
+    width: 79% !important; /*View Width*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+
+}
+
+figcaption {
+    text-align: center;
+    font-size: large;
+    background-color: #9cbab4;
+    font-family: Lato;
+    font-weight: lighter;
+}
+
  .card h5 {
      color: black;
  }
 
  .new-release a:hover {
      text-decoration: none;
+ }
+
+ .überschriftenFooter {
+     background-color: #9cbab4 ;
+     margin-bottom: 20px;
+     width: 80% !important; /*View Width*/
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     font-family: Lato;
+     font-weight: lighter;
+     text-transform: uppercase;
+ }
+
+ .teamtext {
+     text-align:center;
+     width:50%;
+     font-size: 20px;
+
+ }
+
+ .quote {
+     width:3%;
+     height: 3%;
+     margin: 2em;
+ }
+
+ .icon {
+     width:20px;
+     height: 20px;
+     margin: 1em;
  }
 
  #product-details h1 {
