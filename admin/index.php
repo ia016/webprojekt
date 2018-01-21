@@ -158,6 +158,31 @@ if (isset($_GET["editproduct"])) {
     $selectedProduct = $prepared->fetch(PDO::FETCH_ASSOC);
 }
 
+// Produkt editieren speichern
+if (isset($_GET["editproduct"]) && !empty($_POST)) {
+    $name = $_POST["name"];
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $categoryid = $_POST["category"];
+    $price = $_POST["price"];
+    $ean = $_POST["ean"];
+
+    // bild hochladen
+    $foto = "";
+    if ($_FILES["foto"]["name"] !== "") {
+        move_uploaded_file($_FILES['foto']['tmp_name'],  "./../images/products/".$_FILES["foto"]["name"]);
+        $foto = $_FILES["foto"]["name"];
+    } else {
+        $foto = $selectedProduct["image"];
+    }
+
+    // Produkt speichern
+    $statement = $pdo->prepare("UPDATE products SET name = ?, title = ?, description = ?, categoryid = ?, price = ?, image = ?, ean = ? WHERE id = ?");
+    $statement->execute(
+        array($name, $title, $description, $categoryid, $price, $foto, $ean, $selectedProduct["id"])
+    );
+    header("Location: ?manage=products");}
+
 
 ?>
 <!DOCTYPE html>
@@ -264,6 +289,7 @@ if (isset($_GET["editproduct"])) {
                 </ul>
 
                 <?php if(!$_GET["editproduct"]) : ?>
+                <h3>Produkt hinzufügen</h3>
                 <form action="?manage=products&addproduct=1" method="post" enctype="multipart/form-data">
                     Produktname:<br />
                     <input type="text" name="name" /><br />
@@ -288,7 +314,8 @@ if (isset($_GET["editproduct"])) {
                     <input type="submit" value="speichern" />
                 </form>
                 <?php else : ?>
-                <form action="?manage=products&addproduct=1" method="post" enctype="multipart/form-data">
+                <h3>Produkt bearbeiten</h3>
+                <form action="?manage=products&editproduct=<?=$selectedProduct["id"];?>" method="post" enctype="multipart/form-data">
                     Produktname:<br />
                     <input type="text" name="name" value="<?=$selectedProduct["name"];?>" /><br />
                     Titel:<br />
@@ -310,6 +337,7 @@ if (isset($_GET["editproduct"])) {
                     Preis:<br />
                     <input type="text" name="price" value="<?= $selectedProduct["price"]; ?>" /><br />
                     Foto:<br />
+                    <img width="200" src="./../images/products/<?=$selectedProduct["image"];?>" /><br />
                     <input type="file" name="foto" value="<?= $selectedProduct["image"]; ?>" /><br />
                     EAN-Code<br />
                     <input type="text" name="ean" value="<?= $selectedProduct["ean"]; ?>"  /><br />

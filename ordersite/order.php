@@ -1,5 +1,7 @@
 <h1>Order Overview</h1>
 
+<form action="?page=order" method="post" role="form">
+
 <div class="row justify-content-start">
 
     <div class="col-12 col-md-8">
@@ -13,7 +15,7 @@
             <div class="collapse col-auto" id="collapseCoupon">
                 <div class="form-group">
                     <label class="form-control-label text-muted" for="field_coupon_code">Enter Code:</label>
-                    <input type="text" class="form-control" id="field_coupon_code" required>
+                    <input name="coupon_code" type="text" class="form-control" id="field_coupon_code">
                 </div>
             </div>
         </div>
@@ -34,75 +36,65 @@
                 <div class="tab-content col-12" id="personalInformationContent">
 
                     <div class="tab-pane fade show active" id="distributionAddress" role="tabpanel" aria-labelledby="distribution-address-tab">
-                        <form method="post" class="row justify-content-end">
                             <div class="form-group mt-3 col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Name and first name:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="dist_name" id="dist_name" required>
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Street and Housenumber:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="dist_address" id="dist_address" required>
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">City:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="dist_city" id="dist_city" required>
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Postcode:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="number" class="form-control" name="dist_postcode" id="dist_postcode" required>
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Country:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="dist_country" id="dist_country" required>
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Email Address:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" id="field_coupon_code" name="dist_email", id="dist_email" required>
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Mobile number:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="number" class="form-control" name="dist_mobil" id="dist_mobil" required>
                             </div>
-                            <div class="col-auto">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                            </div>
-                        </form>
                     </div>
 
                     <div class="tab-pane fade" id="billAddress" role="tabpanel" aria-labelledby="bill-address-tab">
-                        <form method="post" class="row justify-content-end">
                             <div class="form-group mt-3 col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Name and first name:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="bill_name" id="bill_name">
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Street and Housenumber:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="bill_address" id="bill_address">
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">City:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="bill_city" id="bill_city">
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Postcode:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="number" class="form-control" name="bill_postcode" id="bill_postcode">
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Country:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="bill_country" id="bill_country">
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Email Address:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="text" class="form-control" name="bill_email" id="bill_email">
                             </div>
                             <div class="form-group col-12">
                                 <label class="form-control-label text-muted" for="field_coupon_code">Mobile number:</label>
-                                <input type="text" class="form-control" id="field_coupon_code" required>
+                                <input type="number" class="form-control" name="bill_mobil" id="bill_mobil">
                             </div>
-                            <div class="col-auto">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -183,10 +175,35 @@
     <div class="d-none d-md-block col-4" style="padding-left: 0">
         <div class="card col-12" style="position: sticky; position: -webkit-sticky; top: 0;">
             <div class="card-body row justify-content-between">
-                <h1>HALLO</h1>
+                <h1>Shopping bag</h1>
+                <?php
+                $sqlContent = 'SELECT p.name, c.name as category_name, p.title, p.description, p.price, s.amount, p.price * s.amount as total
+                FROM shoppingbag s, products p, categories c 
+                WHERE s.productsid = p.id AND p.categoryid = c.id AND s.sessionid = "'.$sessionId.'"';
+                $sqlTotalSum = 'SELECT SUM(p.price * s.amount) as totalSum FROM products p, shoppingbag s WHERE s.productsid = p.id AND s.sessionid = "'.$sessionId.'"';
+                $preparedContent = $pdo->prepare($sqlContent);
+                $preparedSum = $pdo->prepare($sqlTotalSum);
+                $preparedContent->execute();
+                $preparedSum->execute();
+                $products = $preparedContent->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
+                $totalSum = $preparedSum->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($products as $product) {
+                    ?>
+                        <div>
+                            <h3><?=$product["amount"];?>x <?=$product["name"];?></h3>
+                            <p><?=money_format('%.2n', $product["total"]);?>€</p>
+                        </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>
 </div>
 
+<div class="col-auto">
+    <button type="submit" name="submitButton" class="btn btn-primary">Submit</button>
+</div>
 
+
+</form>
