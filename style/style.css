@@ -32,10 +32,13 @@ h1.mylovelyhome{
 
 #header li a, #footer li a {
     text-decoration: none;
-    color: black;
     letter-spacing: 0.3em;
     padding-left: 0.5em;
     padding-right: 0.5em;
+}
+
+#footer li a {
+    color: black;
 }
 
 #header li a:hover, #footer li a:hover {
@@ -54,13 +57,6 @@ IMG.startseitenbild {
     width: 100%;
     height: auto;
     margin: 30px 0 30px 0;
-}
-
-.container {
-    width: 1100px;
-    display: block;
-    height: auto;
-    margin: 0 auto;
 }
 
 IMG.footer {
@@ -107,3 +103,58 @@ IMG.footer:hover {
  .new-release a:hover {
      text-decoration: none;
  }
+
+ #product-details h1 {
+     padding: 10px;
+     background-color: #9cbab4;
+ }
+
+ .btn-primary {
+     border-color: #9cbab4;
+     color: black;
+     background-color: #9cbab4;
+ }
+
+.btn-primary:hover {
+    border-color: grey;
+    color: black;
+    background-color: grey;
+}
+
+ .category-header {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 300px;
+     padding: 15px;
+     background: url("../images/kategoriebild.jpg") no-repeat center center;
+     background-size: cover;
+ }
+
+.overlay div {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(81, 122, 115, 0.8)
+}
+
+.img-container:hover .overlay {
+    opacity: 1;
+}

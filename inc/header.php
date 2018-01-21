@@ -19,7 +19,11 @@
 
 
                     foreach($categories as $category) {
-                        echo "<li class='nav-item'><a class='nav-link' href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>\n";
+                        if (isset($_GET["category"]) && $_GET["category"] == $category["id"]) {
+                            echo "<li class='nav-item active'><a class='nav-link' href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>\n";
+                        } else {
+                            echo "<li class='nav-item'><a class='nav-link' href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>\n";
+                        }
                     }
                 ?>
                 <li class='nav-item'>

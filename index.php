@@ -20,7 +20,7 @@
 <?php
 include "inc/header.php";
 ?>
-<div class="container-fluid">
+<div class="container">
     <?php
         if (isset($_GET["category"])) {
         include("inc/category.php");
