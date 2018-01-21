@@ -99,3 +99,11 @@ IMG.footer:hover {
  .img-100 {
      width: 100% !important; /*View Width*/
  }
+
+ .card h5 {
+     color: black;
+ }
+
+ .new-release a:hover {
+     text-decoration: none;
+ }
