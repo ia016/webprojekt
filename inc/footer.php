@@ -8,7 +8,7 @@
         </li>
     </ul>
     <hr/>
-    <div class="social-media">
+    <div class="social-media justify-content-center">
       <a href="https://www.instagram.com/mylovelyhome.hdm/" target="_blank"> <img class="footer" src="images/instagram.png" width="25" height="25" alt="instagram"></a>
     </div>
 </footer>

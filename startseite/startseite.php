@@ -34,12 +34,12 @@
     $products = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
     foreach($products as $product) {
-        echo "<div class='mt-4 col-12 col-sm-6 col-lg-3'>";
+        echo "<div class='new-release mt-4 col-12 col-sm-6 col-lg-3'>";
         echo "<a href='index.php?product=".$product["id"]."'>";
         echo "<div class='card'>";
         echo "<img class='card-img-top' width='100%' src='images/".$product["image"]."'>";
         echo "<div class='card-body'><h5>".$product["name"]."</h5>";
-        echo "<p>".money_format('%.2n', $product["price"])."€"."</p>";
+        echo "<p class='text-muted'>".money_format('%.2n', $product["price"])."€"."</p>";
         echo "</div></div></a></div>";
     }
     ?>
