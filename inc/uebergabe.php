@@ -14,6 +14,9 @@ catch (PDOException $p) {
 session_start();
 $sessionId = session_id();
 
+
+
+// in Warenkorb hinzufügen
 if (isset($_GET["action"])) {
 
     if ($_GET["action"] == "add-to-bag") {
@@ -21,14 +24,60 @@ if (isset($_GET["action"])) {
         $amount = $_POST["amount"];
         $productId = $_GET["productid"];
 
-        $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
+        // Ist Produkt schon in Warenkorb? Anzahl erhöhen
+        $statement = $pdo->prepare("SELECT * FROM shoppingbag WHERE productsid = ? AND sessionid = ?");
         $statement->execute(
-            array($productId, $amount, $sessionId)
-        );
-        header("Location: ?page=shoppingbag");
+            array($productId, $sessionId)
+        ) or die(print_r($statement->errorInfo(), true));
+        $shoppingBag = $statement->fetch(PDO::FETCH_ASSOC);
 
+        if (empty($shoppingBag)) {
+            $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
+            $statement->execute(
+                array($productId, $amount, $sessionId)
+            ) or die(print_r($statement->errorInfo(), true));
+        } else {
+            // Anzahl erhöhen
+            $amountNew = $shoppingBag["amount"] + $amount;
+
+            $statement = $pdo->prepare("UPDATE shoppingbag SET amount = ? WHERE id = ?");
+            $statement->execute(
+                array($amountNew, $shoppingBag["id"])
+            ) or die(print_r($statement->errorInfo(), true));
+        }
+
+        header("Location: ?page=shoppingbag");
     }
 
+}
+
+// Artikel aus Warenkorb löschen
+if (isset($_GET["removefromshoppingbag"])) {
+    // Produkt speichern
+    $statement = $pdo->prepare("DELETE FROM shoppingbag WHERE id = ? AND sessionid = ?");
+    $statement->execute(
+        array($_GET["removefromshoppingbag"], session_id())
+    ) or die(print_r($statement->errorInfo(), true));
+
+    echo "ok";
+
+    header("Location: ?page=shoppingbag");
+}
+
+
+// Anzahl erhöhen
+if (isset($_GET["changeamount"])) {
+
+    echo "anz";
+    $product_id = $_GET["changeamount"];
+    $amount = $_POST["amount"];
+
+    $statement = $pdo->prepare("UPDATE shoppingbag SET amount = ? WHERE productsid = ? AND sessionid = ?");
+    $statement->execute(
+        array($amount, $product_id, $sessionId)
+    ) or die(print_r($statement->errorInfo(), true));
+
+    header("Location: ?page=shoppingbag");
 }
 
 
