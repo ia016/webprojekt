@@ -39,6 +39,8 @@ include "inc/header.php";
             include("aboutus/aboutus.html");
         } else if ($_GET["page"] == "faq") {
             include("faq/faq.html");
+        } else if ($_GET["page"] == "search") {
+            include("search/search.php");
         }
 
     } else {

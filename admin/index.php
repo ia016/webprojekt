@@ -108,9 +108,7 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
 // Kategorien holen (fürs Hinzufügen von Produkten)
 $sql = "SELECT * FROM categories";
 $prepared = $pdo->prepare($sql);
-$prepared->execute(array(
-    $id
-));
+$prepared->execute(array());
 $allCategories = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
 // Produkt speichern
@@ -119,6 +117,7 @@ if (isset($_GET["addproduct"])) {
     $title = $_POST["title"];
     $description = $_POST["description"];
     $categoryid = $_POST["category"];
+    $details = $_POST["details"];
     $price = $_POST["price"];
     $ean = $_POST["ean"];
 
@@ -129,10 +128,15 @@ if (isset($_GET["addproduct"])) {
         $foto = $_FILES["foto"]["name"];
     }
 
+    // Wenn kein Image gesetzt, dann Platzhalter
+    if ($foto == "") {
+        $foto = "noimage.PNG";
+    }
+
     // Produkt speichern
-    $statement = $pdo->prepare("INSERT INTO products (name, title, description, categoryid, price, image, ean) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $statement = $pdo->prepare("INSERT INTO products (name, title, description, categoryid, details, price, image, ean) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $statement->execute(
-        array($name, $title, $description, $categoryid, $price, $foto, $ean)
+        array($name, $title, $description, $categoryid, $details, $price, $foto, $ean)
     );
     header("Location: ?manage=products");
 }
@@ -148,8 +152,8 @@ if (isset($_GET["deleteproduct"])) {
 }
 
 // Produkt zum editieren holen
-if (isset($_GET["editproduct"])) {
-    $id = $_GET["editproduct"];
+if (isset($_GET["product"])) {
+    $id = $_GET["product"];
     $sql = "SELECT * FROM products WHERE id = ?";
     $prepared = $pdo->prepare($sql);
     $prepared->execute(array(
@@ -158,12 +162,13 @@ if (isset($_GET["editproduct"])) {
     $selectedProduct = $prepared->fetch(PDO::FETCH_ASSOC);
 }
 
-// Produkt editieren speichern
+// Produkt editieren
 if (isset($_GET["editproduct"]) && !empty($_POST)) {
     $name = $_POST["name"];
     $title = $_POST["title"];
     $description = $_POST["description"];
     $categoryid = $_POST["category"];
+    $details = $_POST["details"];
     $price = $_POST["price"];
     $ean = $_POST["ean"];
 
@@ -176,13 +181,80 @@ if (isset($_GET["editproduct"]) && !empty($_POST)) {
         $foto = $selectedProduct["image"];
     }
 
-    // Produkt speichern
-    $statement = $pdo->prepare("UPDATE products SET name = ?, title = ?, description = ?, categoryid = ?, price = ?, image = ?, ean = ? WHERE id = ?");
-    $statement->execute(
-        array($name, $title, $description, $categoryid, $price, $foto, $ean, $selectedProduct["id"])
-    );
-    header("Location: ?manage=products");}
+    // Wenn kein Image gesetzt, dann Platzhalter
+    if ($foto == "") {
+        $foto = "noimage.PNG";
+    }
 
+    // Produkt speichern
+    $statement = $pdo->prepare("UPDATE products SET name = ?, title = ?, description = ?, categoryid = ?, details = ?, price = ?, image = ?, ean = ? WHERE id = ?");
+    $statement->execute(
+        array($name, $title, $description, $categoryid, $details, $price, $foto, $ean, $selectedProduct["id"])
+    );
+    header("Location: ?manage=products");
+}
+
+// Benutzer speichern
+if (isset($_GET["adduser"])) {
+    $name = $_POST["name"];
+    $password = $_POST["password"];
+    $statement = $pdo->prepare("INSERT INTO users (name, password) VALUES (?, md5(?))");
+    $statement->execute(
+        array($name, $password)
+    );
+    header("Location: ?manage=users");
+}
+
+// Benutzer zum Ändern holen
+if (isset($_GET["user"])) {
+    $id = $_GET["user"];
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $prepared = $pdo->prepare($sql);
+    $prepared->execute(array(
+        $id
+    ));
+    $selectedUser = $prepared->fetch(PDO::FETCH_ASSOC);
+}
+
+// Benutzer zum Ändern holen
+if (isset($_GET["edituser"]) && !empty($_POST)) {
+
+    $id = $_GET["edituser"];
+    $name = $_POST["name"];
+    $password = $_POST["password"];
+
+    $sql = "UPDATE users SET name = ? WHERE id = ?";
+    $prepared = $pdo->prepare($sql);
+    $prepared->execute(array(
+        $name, $id
+    ));
+
+    // neues Passwort eingegeben? Dann ändern
+    if (!empty($password)) {
+        $sql = "UPDATE users SET password = md5(?) WHERE id = ?";
+        $prepared = $pdo->prepare($sql);
+        $prepared->execute(array(
+            $password, $id
+        ));
+    }
+
+    $selectedUser = $prepared->fetch(PDO::FETCH_ASSOC);
+    header("Location: ?manage=users");
+}
+
+// Benutzer löschen
+if (isset($_GET["deleteuser"])) {
+
+    $id = $_GET["deleteuser"];
+
+    $sql = "DELETE FROM users WHERE id = ?";
+    $prepared = $pdo->prepare($sql);
+    $prepared->execute(array(
+        $id
+    ));
+
+    header("Location: ?manage=users");
+}
 
 ?>
 <!DOCTYPE html>
@@ -238,144 +310,31 @@ if (isset($_GET["editproduct"]) && !empty($_POST)) {
                 <li><a href="?manage=products">Produkte</a></li>
                 <li><a href="?manage=orders">Bestellungen</a></li>
                 <li><a href="?manage=users">Benutzer</a></li>
-                <li><a href="?manage=discount">Rabattcodes</a></li>
                 <li><a href="?logout=1">logout (<?=$user["name"]; ?>)</a></li>
             </ul>
         </div>
         <div id="content">
 
             <?php if ($manage == "categories") : ?>
-                <h2>Kategorien</h2>
-
-                <ul>
-                    <?php
-                    $sql = 'SELECT * FROM categories ORDER BY id';
-                    $prepared = $pdo->prepare($sql);
-                    $prepared->execute();
-                    $categories = $prepared->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach($categories as $category) {
-                        echo "<ul>".$category["name"]." <a href=\"?manage=categories&deletecategory=".$category["id"]."\">delete</a> <a href=\"?manage=categories&editcategory=".$category["id"]."\">edit</a></ul>";
-                    }
-                    ?>
-                </ul>
-
-                <?php if(!$_GET["editcategory"]) : ?>
-                <form action="?manage=categories&addcategory=1" method="post">
-                    <h4>Kategorie hinzufügen</h4>
-                    <input type="text" name="name" /><input type="submit" value="speichern" />
-                </form>
-                <?php else : ?>
-                <form action="?manage=categories&editcategory=<?=$selectedCategory["id"];?>" method="post">
-                    <h4>Kategorie bearbeiten</h4>
-                    <input type="text" name="name" value="<?=$selectedCategory["name"];?>" /><input type="submit" value="speichern" />
-                </form>
-                <?php endif; ?>
-
+                <?php include("./inc/categories.php"); ?>
+            <?php elseif ($manage == "addcategory") : ?>
+                <?php include("./inc/category_add.php"); ?>
+            <?php elseif ($manage == "editcategory") : ?>
+                <?php include("./inc/category_edit.php"); ?>
             <?php elseif ($manage == "products") : ?>
-                <h2>Produkte</h2>
-
-                <ul>
-                    <?php
-                    $sql = 'SELECT * FROM products ORDER BY id';
-                    $prepared = $pdo->prepare($sql);
-                    $prepared->execute();
-                    $products = $prepared->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach($products as $product) {
-                        echo "<ul>".$product["name"]." <a href=\"?manage=products&deleteproduct=".$product["id"]."\">delete</a> <a href=\"?manage=products&editproduct=".$product["id"]."\">edit</a></ul>";
-                    }
-                    ?>
-                </ul>
-
-                <?php if(!$_GET["editproduct"]) : ?>
-                <h3>Produkt hinzufügen</h3>
-                <form action="?manage=products&addproduct=1" method="post" enctype="multipart/form-data">
-                    Produktname:<br />
-                    <input type="text" name="name" /><br />
-                    Titel:<br />
-                    <input type="text" name="title" /><br />
-                    Beschreibung:<br />
-                    <textarea name="description"></textarea><br />
-                    Kategorie:<br />
-                    <select name="category">
-                        <?php
-                            foreach($allCategories as $category) {
-                                echo "<option value=\"".$category["id"]."\">".$category["name"]."</option>";
-                            }
-                        ?>
-                    </select><br />
-                    Preis:<br />
-                    <input type="text" name="price" /><br />
-                    Foto:<br />
-                    <input type="file" name="foto" /><br />
-                    EAN-Code<br />
-                    <input type="text" name="ean" /><br />
-                    <input type="submit" value="speichern" />
-                </form>
-                <?php else : ?>
-                <h3>Produkt bearbeiten</h3>
-                <form action="?manage=products&editproduct=<?=$selectedProduct["id"];?>" method="post" enctype="multipart/form-data">
-                    Produktname:<br />
-                    <input type="text" name="name" value="<?=$selectedProduct["name"];?>" /><br />
-                    Titel:<br />
-                    <input type="text" name="title" value="<?=$selectedProduct["title"];?>"/><br />
-                    Beschreibung:<br />
-                    <textarea name="description"><?= $selectedProduct["name"]; ?></textarea><br />
-                    Kategorie:<br />
-                    <select name="category">
-                        <?php
-                        foreach($allCategories as $category) {
-                            if ($selectedProduct["categoryid"] == $category["id"]) {
-                               echo "<option selected=\"selected\" value=\"" . $category["id"] . "\">" . $category["name"] . "</option>";
-                            } else {
-                                echo "<option value=\"" . $category["id"] . "\">" . $category["name"] . "</option>";
-                            }
-                        }
-                        ?>
-                    </select><br />
-                    Preis:<br />
-                    <input type="text" name="price" value="<?= $selectedProduct["price"]; ?>" /><br />
-                    Foto:<br />
-                    <img width="200" src="./../images/products/<?=$selectedProduct["image"];?>" /><br />
-                    <input type="file" name="foto" value="<?= $selectedProduct["image"]; ?>" /><br />
-                    EAN-Code<br />
-                    <input type="text" name="ean" value="<?= $selectedProduct["ean"]; ?>"  /><br />
-                    <input type="submit" value="speichern" />
-                </form>
-                <?php endif; ?>
-
+                <?php include("./inc/products.php"); ?>
+            <?php elseif ($manage == "addproduct") : ?>
+                <?php include("./inc/product_add.php"); ?>
+            <?php elseif ($manage == "editproduct") : ?>
+                <?php include("./inc/product_edit.php"); ?>
             <?php elseif ($manage == "orders") : ?>
-                <h2>Bestellungen</h2>
-
-                <ul>
-                    <?php
-                    $sql = 'SELECT * FROM shoppingbag ORDER BY id';
-                    $prepared = $pdo->prepare($sql);
-                    $prepared->execute();
-                    $orders = $prepared->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach($orders as $order) {
-                        echo "<ul>".$order["id"]."</ul>";
-                    }
-                    ?>
-                </ul>
-
+                <?php include("./inc/orders.php"); ?>
             <?php elseif ($manage == "users") : ?>
-                <h2>Benutzer</h2>
-
-                <ul>
-                    <?php
-                    $sql = 'SELECT * FROM users ORDER BY id';
-                    $prepared = $pdo->prepare($sql);
-                    $prepared->execute();
-                    $users = $prepared->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach($users as $user) {
-                        echo "<ul>".$user["name"]."</ul>";
-                    }
-                    ?>
-                </ul>
+                <?php include("./inc/users.php"); ?>
+            <?php elseif ($manage == "adduser") : ?>
+                <?php include("./inc/user_add.php"); ?>
+            <?php elseif ($manage == "edituser") : ?>
+                <?php include("./inc/user_edit.php"); ?>
             <?php endif; ?>
 
         </div>
