@@ -31,6 +31,11 @@
                         <img src="images/shopping-bag.png" width="25" height="25" alt="Shopping bag">
                     </a>
                 </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href="index.php?page=search">
+                        <img src="images/search.png" width="25" height="25" alt="Search">
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

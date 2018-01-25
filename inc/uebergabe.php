@@ -59,5 +59,25 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
     die("Danke für deine Bestellung");
 }
 
+// Produktbewertungen speichern
+if(isset($_GET["page"]) && $_GET["page"] == "addcomment") {
+
+    $id = $_GET["id"];
+    $name = $_POST["name"];
+    $rating = $_POST["rating"];
+    $comment = $_POST["comment"];
+
+    $statement = $pdo->prepare("INSERT INTO ratings (productid, name, rating, comment) VALUES (?, ?, ?, ?)");
+    $statement->execute(
+        array($id, $name, $rating, $comment)
+    ) or die(print_r($statement->errorInfo(), true));
+
+    header("Location: ./?product=".$id);
+}
+
+// Kontaktformular absenden
+if(isset($_GET["page"]) && $_GET["page"] == "contactform" && !empty($_POST)) {
+    header("Location: ./?page=mailsent");
+}
 
 ?>
