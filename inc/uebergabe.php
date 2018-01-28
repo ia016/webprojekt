@@ -134,7 +134,10 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
     $message .= "Sum: ".$totalSum[0]["totalSum"]."€";
     $message .= "\n\n";
     $message .= "We will ship your order soon!\n";
-    $message .= "Your MLH Team";
+    $message .= "Your MLH Team\n\n";
+
+    $message .= "www.mylovelyhome.com is a fictional offer from the fictional Mylovelyhome GmbH.\n\nOperator of the website: Mylovelyhome GmbH \nKatharinenstraße 16, 70182 Stuttgart\n\n";
+    $message .= "Management: Irmak Ali, Anna-Maria Schmieder, Nina Gausling\n\nResponsible for the content of this offer pursuant to § 55 sect. 2 RStV: Irmak Ali, Anna-Maria Schmieder, Nina Gausling\n\nMy lovely home was created for a student project and is just a fictional company";
 
     mail($to, $subject, $message, $header);
 
