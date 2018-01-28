@@ -99,14 +99,47 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
     $bill_email = $_POST["bill_email"];
     $bill_mobil = $_POST["bill_mobil"];
 
-    // Produkt speichern
+    // Bestellung speichern
     $statement = $pdo->prepare("INSERT INTO orders (sessionid, dist_name, dist_address, dist_city, dist_postcode, dist_country, dist_email, dist_mobil, bill_name, bill_address, bill_city, bill_postcode, bill_country, bill_email, bill_mobil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $statement->execute(
         array(session_id(), $dist_name, $dist_address, $dist_city, $dist_postcode, $dist_country, $dist_email, $dist_mobil, $bill_name, $bill_address, $bill_city, $bill_postcode, $bill_country, $bill_email, $bill_mobil)
     ) or die(print_r($statement->errorInfo(), true));
 
+    // E-Mails senden
+    $to = $dist_email;
+    $from = "order@mylovelyhome.de";
+    $subject = "Your order from mylovelyhome!";
+    $message = "Hi ".$dist_name.",\n\nthank you for your order!\n\n";
+    $header = "From: ".$from;
+
+    // Warenkorb aus Datenbank holen (wie bei Shoppingbag)
+    $sqlContent = 'SELECT s.id as shoppingbag_id, p.name, c.name as category_name, p.id as product_id, p.title, p.description, p.price, s.amount, p.price * s.amount as total
+            FROM shoppingbag s, products p, categories c 
+            WHERE s.productsid = p.id AND p.categoryid = c.id AND s.sessionid = "'.$sessionId.'"';
+    $sqlTotalSum = 'SELECT SUM(p.price * s.amount) as totalSum FROM products p, shoppingbag s WHERE s.productsid = p.id AND s.sessionid = "'.$sessionId.'"';
+    $preparedContent = $pdo->prepare($sqlContent);
+    $preparedSum = $pdo->prepare($sqlTotalSum);
+    $preparedContent->execute();
+    $preparedSum->execute();
+    $products = $preparedContent->fetchAll(PDO::FETCH_ASSOC);
+    $totalSum = $preparedSum->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($products as $product) {
+        $message .= $product["amount"]."x ";
+        $message .= $product["name"];
+        $message .= " á ".$product["price"]."€, sum: ".($product["price"]*$product["amount"])."€";
+        $message .= "\n";
+    }
+
+    $message .= "Sum: ".$totalSum[0]["totalSum"]."€";
+    $message .= "\n\n";
+    $message .= "We will ship your order soon!\n";
+    $message .= "Your MLH Team";
+
+    mail($to, $subject, $message, $header);
+
     session_regenerate_id();
-    die("Thank you for your order");
+    header("Location: ?page=thankyouforyourorder");
 }
 
 // Produktbewertungen speichern

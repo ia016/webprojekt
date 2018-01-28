@@ -31,6 +31,8 @@ include "inc/header.php";
             include("shoppingbag/shoppingbag.php");
         } else if ($_GET["page"] == "order") {
             include("ordersite/order.php");
+        } else if ($_GET["page"] == "thankyouforyourorder") {
+            include("ordersite/thankyou.php");
         } else if ($_GET["page"] == "imprint") {
             include("imprint/imprint.html");
         } else if ($_GET["page"] == "contact") {
