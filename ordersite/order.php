@@ -161,7 +161,7 @@
                     <div class="mt-3 row justify-content-around">
                         <div class="col-11">
                             <div class="font-weight-bold">Bill</div>
-                            <div class="mt-3 text-muted">TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</div>
+                            <div class="mt-3 text-muted">Mail</div>
                         </div>
                         <div class="my-auto col-1">
                             <input type="radio" name="billType">
