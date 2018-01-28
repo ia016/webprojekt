@@ -109,7 +109,7 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
     $to = $dist_email;
     $from = "order@mylovelyhome.de";
     $subject = "Your order from mylovelyhome!";
-    $message = "Hi ".$dist_name.",\n\nthank you for your order!\n\n";
+    $message = "Hi ".$dist_name.",\n\nthank you for your order!\n\nPlease transfer the sum on the bank account DE837248742842834.\n\n";
     $header = "From: ".$from;
 
     // Warenkorb aus Datenbank holen (wie bei Shoppingbag)

@@ -86,12 +86,12 @@
                 <div class="form-row justify-content-start">
                     <div class="col-6 form-group">
                         <label for="inputName">Title</label>
-                        <input type="text" name ="name" class="form-control" id="inputName" placeholder="Title">
+                        <input type="text" name ="name" class="form-control" id="inputName" placeholder="Title" required>
                     </div>
                     <div class="w-100"></div>
                     <div class="col-6 form-group">
                         <label for="rating">Rating</label>
-                        <select class="form-control" id="rating" name="rating">
+                        <select class="form-control" id="rating" name="rating" required>
                             <option>Please select</option>
                             <option value="1">1 Star</option>
                             <option value="2">2 Stars</option>
@@ -103,7 +103,7 @@
                     <div class="w-100"></div>
                     <div class="col-6 form-group">
                         <label for="inputComment">Comment</label>
-                        <textarea name ="comment" class="form-control" id="inputComment" placeholder="Comment"></textarea>
+                        <textarea name ="comment" class="form-control" id="inputComment" placeholder="Comment" required></textarea>
                     </div>
                     <div class="w-100"></div>
                     <div class="col-6 form-group">
