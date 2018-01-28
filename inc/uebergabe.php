@@ -84,20 +84,20 @@ if (isset($_GET["changeamount"])) {
 // Warenkorb bestellen
 if ($_GET["page"] == "order" && !empty($_POST)) {
 
-    $dist_name = $_POST["dist_name"];
-    $dist_address = $_POST["dist_address"];
-    $dist_city = $_POST["dist_city"];
-    $dist_postcode = $_POST["dist_postcode"];
-    $dist_country = $_POST["dist_country"];
-    $dist_email = $_POST["dist_email"];
-    $dist_mobil = $_POST["dist_mobil"];
-    $bill_name = $_POST["bill_name"];
-    $bill_address = $_POST["bill_address"];
-    $bill_city = $_POST["bill_city"];
-    $bill_postcode = $_POST["bill_postcode"];
-    $bill_country = $_POST["bill_country"];
-    $bill_email = $_POST["bill_email"];
-    $bill_mobil = $_POST["bill_mobil"];
+    $dist_name = htmlentities($_POST["dist_name"]);
+    $dist_address = htmlentities($_POST["dist_address"]);
+    $dist_city = htmlentities($_POST["dist_city"]);
+    $dist_postcode = htmlentities($_POST["dist_postcode"]);
+    $dist_country = htmlentities($_POST["dist_country"]);
+    $dist_email = htmlentities($_POST["dist_email"]);
+    $dist_mobil = htmlentities($_POST["dist_mobil"]);
+    $bill_name = htmlentities($_POST["bill_name"]);
+    $bill_address = htmlentities($_POST["bill_address"]);
+    $bill_city = htmlentities($_POST["bill_city"]);
+    $bill_postcode = htmlentities($_POST["bill_postcode"]);
+    $bill_country = htmlentities($_POST["bill_country"]);
+    $bill_email = htmlentities($_POST["bill_email"]);
+    $bill_mobil = htmlentities($_POST["bill_mobil"]);
 
     // Bestellung speichern
     $statement = $pdo->prepare("INSERT INTO orders (sessionid, dist_name, dist_address, dist_city, dist_postcode, dist_country, dist_email, dist_mobil, bill_name, bill_address, bill_city, bill_postcode, bill_country, bill_email, bill_mobil) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -146,9 +146,9 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
 if(isset($_GET["page"]) && $_GET["page"] == "addcomment") {
 
     $id = $_GET["id"];
-    $name = $_POST["name"];
-    $rating = $_POST["rating"];
-    $comment = $_POST["comment"];
+    $name = htmlentities($_POST["name"]);
+    $rating = htmlentities($_POST["rating"]);
+    $comment = htmlentities($_POST["comment"]);
 
     $statement = $pdo->prepare("INSERT INTO ratings (productid, name, rating, comment) VALUES (?, ?, ?, ?)");
     $statement->execute(

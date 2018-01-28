@@ -11,7 +11,7 @@
 <div class="row justify-content-center">
 <?php
 
-    $q = $_GET["q"];
+    $q = htmlentities($_GET["q"]);
     echo "<h2>Results for ".$q."</h2>";
 
     $sql = "SELECT * FROM products WHERE name LIKE ? OR title  LIKE ? OR description  LIKE ? OR details  LIKE ?";
