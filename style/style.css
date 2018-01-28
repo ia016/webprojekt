@@ -202,3 +202,19 @@ figcaption {
 .img-container:hover .overlay {
     opacity: 1;
 }
+
+.carousel-control-next, .carousel-control-prev {
+    opacity: 0.5;
+}
+
+.carousel-control-next:hover, .carousel-control-prev:hover {
+    opacity: 0.8;
+}
+
+.carousel-control-next {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.carousel-control-prev {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}

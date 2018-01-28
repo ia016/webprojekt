@@ -5,7 +5,7 @@
 <div class="row justify-content-start">
 
     <div class="col-12 col-md-8">
-        <div class="card col-12">
+        <!--<div class="card col-12">
             <div class="card-body row justify-content-between">
                 <h4 class="card-title">Coupon Code</h4>
                 <a data-toggle="collapse" href="#collapseCoupon" aria-expanded="false" aria-controls="collapseCoupon">
@@ -18,10 +18,10 @@
                     <input name="coupon_code" type="text" class="form-control" id="field_coupon_code">
                 </div>
             </div>
-        </div>
+        </div>-->
 
-        <div class="card col-12 mt-3">
-            <div class="card-body row justify-content-between">
+        <div class="card col-12">
+            <div class="card-body row">
                 <h4 class="card-title col-12">Personal Information</h4>
                 <ul class="nav nav-tabs col-12" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -101,10 +101,8 @@
         </div>
 
         <div class="card col-12 mt-3">
-            <div class="card-body row justify-content-between">
+            <div class="card-body row">
                 <h4 class="card-title">Distribution Options</h4>
-
-                <hr>
 
                 <div class="col-12">
                     <div class="mt-3 row justify-content-around">

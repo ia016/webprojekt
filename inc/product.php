@@ -18,6 +18,7 @@
         <div class="row justify-content-start">
             <h2 class="col-12 h6"><?=$product["title"];?></h2>
             <p class="col-12"><?=$product["description"];?></p>
+            <p class="col-12">Artikelnummer: <?=$product["ean"];?></p>
             <strong class="col-12"><?=$product["price"];?>€</strong>
             <?php if ($product["details"] != "") : ?>
                 <h2 class="mt-3 col-12 h6">DETAILS</h2>

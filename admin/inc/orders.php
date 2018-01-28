@@ -41,10 +41,7 @@ foreach($orders as $order) {
 		echo "<td>".number_format($product["price"], 2)."€"."</td>";
 		echo "<td>".$product["amount"]."</td>";
 		echo "<td>".number_format($product["total"], 2)."€"."</td>";
-		echo "<td>";
-		$generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-		echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($product["ean"], $generator::TYPE_EAN_13)) . '">';
-		echo "</td>";
+		echo "<td>".$product["ean"]."</td>";
 		echo "</tr>";
 	}
 	echo "<tr><td>Summe</td><td align='right' colspan='4'>".number_format($totalSum[0]["totalSum"], 2)." €"."</td></tr>"
