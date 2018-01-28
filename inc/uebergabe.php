@@ -31,6 +31,7 @@ if (isset($_GET["action"])) {
         ) or die(print_r($statement->errorInfo(), true));
         $shoppingBag = $statement->fetch(PDO::FETCH_ASSOC);
 
+        // Produkt neu hinzufügen - reingespeichert
         if (empty($shoppingBag)) {
             $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
             $statement->execute(
@@ -53,19 +54,18 @@ if (isset($_GET["action"])) {
 
 // Artikel aus Warenkorb löschen
 if (isset($_GET["removefromshoppingbag"])) {
-    // Produkt speichern
+    // Produkt aus DB löschen
     $statement = $pdo->prepare("DELETE FROM shoppingbag WHERE id = ? AND sessionid = ?");
     $statement->execute(
-        array($_GET["removefromshoppingbag"], session_id())
+        array($_GET["removefromshoppingbag"], $sessionId)
     ) or die(print_r($statement->errorInfo(), true));
 
-    echo "ok";
 
     header("Location: ?page=shoppingbag");
 }
 
 
-// Anzahl erhöhen
+// neue Anzahl setzen im Formular
 if (isset($_GET["changeamount"])) {
 
     echo "anz";
@@ -81,7 +81,7 @@ if (isset($_GET["changeamount"])) {
 }
 
 
-// warenkorb bestellen
+// Warenkorb bestellen
 if ($_GET["page"] == "order" && !empty($_POST)) {
 
     $dist_name = $_POST["dist_name"];
@@ -105,7 +105,8 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
         array(session_id(), $dist_name, $dist_address, $dist_city, $dist_postcode, $dist_country, $dist_email, $dist_mobil, $bill_name, $bill_address, $bill_city, $bill_postcode, $bill_country, $bill_email, $bill_mobil)
     ) or die(print_r($statement->errorInfo(), true));
 
-    die("Danke für deine Bestellung");
+    session_regenerate_id();
+    die("Thank you for your order");
 }
 
 // Produktbewertungen speichern

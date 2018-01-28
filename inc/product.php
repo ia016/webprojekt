@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="col-12 col-md-6 offset-md-6 align-self-end">
-        <form method="post" action="?action=add-to-bag&productid=<?=$product["id"];?>">
+        <form method="post" action="index.php?action=add-to-bag&productid=<?=$product["id"];?>">
             <div class="input-group">
                 <input class="form-control" type="number" name="amount" min="1" value="1" />
                 <div class="input-group-append">
