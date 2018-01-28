@@ -19,7 +19,7 @@ foreach ($products as $product) {
         echo "<a href='index.php?product=".$product["id"]."'>";
         echo "<div class='card img-container'>";
         echO "<div class='overlay'><div>Show</div></div>";
-        echo "<img class='card-img-top' width='100%' src='images/".$product["image"]."'>";
+        echo "<img class='card-img-top' width='100%' src='images/products/".$product["image"]."'>";
         echo "<div class='card-body'><h5>".$product["name"]."</h5>";
         echo "<p class='text-muted'>".money_format('%.2n', $product["price"])."€"."</p>";
         echo "</div></div></a></div>";
