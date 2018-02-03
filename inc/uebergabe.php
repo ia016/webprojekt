@@ -162,7 +162,16 @@ if(isset($_GET["page"]) && $_GET["page"] == "addcomment") {
 }
 
 // Kontaktformular absenden
-if(isset($_GET["page"]) && $_GET["page"] == "contactform" && !empty($_POST)) {
+if (isset($_GET["page"]) && $_GET["page"] == "contactform" && !empty($_POST)) {
+    $dest_name = htmlentities($_POST["name"]);
+    $dest_email = htmlentities($_POST["email"]);
+    $dest_subject = htmlentities($_POST["subject"]);
+    $dest_message = htmlentities($_POST["message"]);
+
+    $to = "nina.ga.contact@gmail.com";
+    $header = "From: ".$dest_email;
+
+    mail($to, $dest_subject, $dest_message, $header);
     header("Location: ./?page=mailsent");
 }
 

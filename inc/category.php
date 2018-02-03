@@ -11,12 +11,12 @@
     echo "<div class=\"row justify-content-center\">";
     echo "<div class=\"col-12\">";
     echo "<div class=\"category-header\">";
-    echo "<h2>".$products[0]["category"]."</h2>";
+    echo "<h2 class='text-uppercase'>".$products[0]["category"]."</h2>";
     echo "</div></div>";
 
 foreach ($products as $product) {
-        echo "<div class='new-release mt-4 col-12 col-sm-6 col-lg-3'>";
-        echo "<a href='index.php?product=".$product["id"]."'>";
+        echo "<div class='new-release mt-4 col-12 col-sm-6 col-lg-3'>"; //new-release?
+        echo "<a href='index.php?product=".$product["id"]."'>"; //bitte was? :-D
         echo "<div class='card img-container'>";
         echO "<div class='overlay'><div>Show</div></div>";
         echo "<img class='card-img-top' width='100%' src='images/products/".$product["image"]."'>";

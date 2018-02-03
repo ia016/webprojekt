@@ -1,14 +1,14 @@
 <div>
-    <h2>Contact form</h2>
-    <form action="?page=contactform" method="post">
+    <h2 class="überschriftenFooter col-12"> Contact form</h2>
+    <form class="form-control justify-content-center col-12" action="?page=contactform" method="post"> <!-- wohin wird das übergeben? -->
         Name: <br />
-        <input type name="name" /><br />
+        <input class="form-control" type name="name" /><br />
         E-Mail: <br />
-        <input type name="message" /><br />
+        <input class="form-control" type name="email" /><br />
         Subject: <br />
-        <input type name="message" /><br />
+        <input class="form-control" type name="subject" /><br />
         Message:<br />
-        <textarea name="message"></textarea><br />
-        <input type="submit" value="send" />
+        <textarea class="form-control w-100" name="message"></textarea><br />
+        <input class="btn btn-primary" type="submit" value="Send" />
     </form>
 </div>
