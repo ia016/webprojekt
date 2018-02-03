@@ -48,10 +48,12 @@
 </form>
 <script type="text/javascript">
 	function readURL(input) {
+        // führe die funktion nur aus, wenn das input.files array vorhanden ist und wenn die datei in der speicherstelle 0 existiert
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 
 			reader.onload = function (e) {
+			    // das hier ist ein callback, der aufgerufen wird wenn die datei fertig geladen ist
 				$('#upload').attr('src', e.target.result);
 			};
 
