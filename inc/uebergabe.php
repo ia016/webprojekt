@@ -17,47 +17,45 @@ $sessionId = session_id();
 
 
 // in Warenkorb hinzufügen
-if (isset($_GET["action"])) {
+if ($_GET["action"] == "add-to-bag") {
 
-    if ($_GET["action"] == "add-to-bag") {
+    $amount = $_POST["amount"];
+    $productId = $_GET["productid"];
 
-        $amount = $_POST["amount"];
-        $productId = $_GET["productid"];
+    // Ist Produkt schon in Warenkorb?
+    $statement = $pdo->prepare("SELECT * FROM shoppingbag WHERE productsid = ? AND sessionid = ?");
+    $statement->execute(
+        array($productId, $sessionId)
+    ) or die(print_r($statement->errorInfo(), true));
+    $shoppingBag = $statement->fetch(PDO::FETCH_ASSOC);
 
-        // Ist Produkt schon in Warenkorb?
-        $statement = $pdo->prepare("SELECT * FROM shoppingbag WHERE productsid = ? AND sessionid = ?");
+    // Produkt neu hinzufügen - reingespeichert
+    if (empty($shoppingBag)) {
+        $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
         $statement->execute(
-            array($productId, $sessionId)
+            array($productId, $amount, $sessionId)
         ) or die(print_r($statement->errorInfo(), true));
-        $shoppingBag = $statement->fetch(PDO::FETCH_ASSOC);
+    } else {
+        // Anzahl erhöhen
+        $amountNew = $shoppingBag["amount"] + $amount;
 
-        // Produkt neu hinzufügen - reingespeichert
-        if (empty($shoppingBag)) {
-            $statement = $pdo->prepare("INSERT INTO shoppingbag (productsid, amount, sessionid) VALUES (?, ?, ?)");
-            $statement->execute(
-                array($productId, $amount, $sessionId)
-            ) or die(print_r($statement->errorInfo(), true));
-        } else {
-            // Anzahl erhöhen
-            $amountNew = $shoppingBag["amount"] + $amount;
-
-            $statement = $pdo->prepare("UPDATE shoppingbag SET amount = ? WHERE id = ?");
-            $statement->execute(
-                array($amountNew, $shoppingBag["id"])
-            ) or die(print_r($statement->errorInfo(), true));
-        }
-
-        header("Location: ?page=shoppingbag");
+        $statement = $pdo->prepare("UPDATE shoppingbag SET amount = ? WHERE id = ?");
+        $statement->execute(
+            array($amountNew, $shoppingBag["id"])
+        ) or die(print_r($statement->errorInfo(), true));
     }
+
+    header("Location: ?page=shoppingbag");
 
 }
 
 // Artikel aus Warenkorb löschen
 if (isset($_GET["removefromshoppingbag"])) {
+    $id = $_GET["removefromshoppingbag"];
     // Produkt aus DB löschen
     $statement = $pdo->prepare("DELETE FROM shoppingbag WHERE id = ? AND sessionid = ?");
     $statement->execute(
-        array($_GET["removefromshoppingbag"], $sessionId)
+        array($id, $sessionId)
     ) or die(print_r($statement->errorInfo(), true));
 
 
@@ -68,7 +66,6 @@ if (isset($_GET["removefromshoppingbag"])) {
 // neue Anzahl setzen im Formular
 if (isset($_GET["changeamount"])) {
 
-    echo "anz";
     $product_id = $_GET["changeamount"];
     $amount = $_POST["amount"];
 

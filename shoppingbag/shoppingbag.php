@@ -2,16 +2,20 @@
 <hr/>
 
 <?php
+
+    // Hole Warenkorb Einträge, die dazugehörigen Produkte und Kategorien
     $sqlContent = 'SELECT s.id as shoppingbag_id, p.name, c.name as category_name, p.id as product_id, p.title, p.description, p.price, s.amount, p.price * s.amount as total
             FROM shoppingbag s, products p, categories c 
             WHERE s.productsid = p.id AND p.categoryid = c.id AND s.sessionid = "'.$sessionId.'"';
-    $sqlTotalSum = 'SELECT SUM(p.price * s.amount) as totalSum FROM products p, shoppingbag s WHERE s.productsid = p.id AND s.sessionid = "'.$sessionId.'"';
     $preparedContent = $pdo->prepare($sqlContent);
-    $preparedSum = $pdo->prepare($sqlTotalSum);
     $preparedContent->execute();
-    $preparedSum->execute();
     $products = $preparedContent->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
-    $totalSum = $preparedSum->fetchAll(PDO::FETCH_ASSOC);
+
+    // Berechnung der Gesamtsumme des Warenkorbs
+    $sqlTotalSum = 'SELECT SUM(p.price * s.amount) as totalSum FROM products p, shoppingbag s WHERE s.productsid = p.id AND s.sessionid = "'.$sessionId.'"';
+    $preparedSum = $pdo->prepare($sqlTotalSum);
+    $preparedSum->execute();
+    $totalSum = $preparedSum->fetch(PDO::FETCH_ASSOC);
 
     if (!empty($products)) {
 ?>
@@ -42,8 +46,8 @@
                 echo "<td>".number_format($product["total"], 2)."€"."</td>";
                 echo "<td><a href=\"?removefromshoppingbag=".$product["shoppingbag_id"]."\">remove</a></td>";
                 echo "</tr>";
-                }
-                echo "<tr><td>Total</td><td align='right' colspan='6'>".number_format($totalSum[0]["totalSum"], 2)." €"."</td><td></td></tr>"
+            }
+            echo "<tr><td>Total</td><td align='right' colspan='6'>".number_format($totalSum["totalSum"], 2)." €"."</td><td></td></tr>"
             ?>
         </table>
     </div>
