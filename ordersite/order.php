@@ -175,16 +175,13 @@
             <div class="card-body row justify-content-between">
                 <h1>Shopping bag</h1>
                 <?php
-                $sqlContent = 'SELECT p.name, c.name as category_name, p.title, p.description, p.price, s.amount, p.price * s.amount as total
+                //Shopping bestellen
+                $sqlContent = 'SELECT p.name, p.title, p.description, p.price, s.amount, p.price * s.amount as total
                 FROM shoppingbag s, products p, categories c 
                 WHERE s.productsid = p.id AND p.categoryid = c.id AND s.sessionid = "'.$sessionId.'"';
-                $sqlTotalSum = 'SELECT SUM(p.price * s.amount) as totalSum FROM products p, shoppingbag s WHERE s.productsid = p.id AND s.sessionid = "'.$sessionId.'"';
                 $preparedContent = $pdo->prepare($sqlContent);
-                $preparedSum = $pdo->prepare($sqlTotalSum);
                 $preparedContent->execute();
-                $preparedSum->execute();
                 $products = $preparedContent->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
-                $totalSum = $preparedSum->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($products as $product) {
                     ?>
                         <div>
