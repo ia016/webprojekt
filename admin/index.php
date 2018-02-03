@@ -227,10 +227,10 @@ if (isset($_GET["user"])) {
     $selectedUser = $prepared->fetch(PDO::FETCH_ASSOC);
 }
 
-// Benutzer zum Ändern holen
+// Benutzerdaten ändern
 if (isset($_GET["edituser"]) && !empty($_POST)) {
 
-    $id = $_GET["edituser"];
+    $id = $_GET["edituser"]; //edituser = userid
     $name = $_POST["name"];
     $password = $_POST["password"];
 
@@ -249,12 +249,11 @@ if (isset($_GET["edituser"]) && !empty($_POST)) {
         ));
     }
 
-    $selectedUser = $prepared->fetch(PDO::FETCH_ASSOC);
     header("Location: ?manage=users");
 }
 
 // Benutzer löschen
-if (isset($_GET["deleteuser"])) {
+if (isset($_GET["deleteuser"])) { //deleteuser ist die id die über die URL übergeben wird
 
     $id = $_GET["deleteuser"];
 
@@ -264,7 +263,7 @@ if (isset($_GET["deleteuser"])) {
         $id
     ));
 
-    header("Location: ?manage=users");
+    header("Location: ?manage=users"); // damit deleteuser nicht mehr in der URL steht -> schlecht beim Aktualisieren etc.
 }
 
 ?>
