@@ -74,10 +74,7 @@ if ($user) {
 // order-seite als erstes anzeigen
 if ($loggedin && isset($_GET["manage"])) {
     $manage = $_GET["manage"];
-} else {
-    header("Location: ?manage=orders");
 }
-
 
 // Kategorien speichern
 if (isset($_GET["addcategory"])) {
