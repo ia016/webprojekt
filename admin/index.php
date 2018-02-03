@@ -122,19 +122,17 @@ if (isset($_GET["addproduct"])) {
     $ean = $_POST["ean"];
 
     // bild hochladen
-    $foto = "";
     if ($_FILES["foto"]["name"]  !== "") {
         move_uploaded_file($_FILES['foto']['tmp_name'],  "./../images/products/".$_FILES["foto"]["name"]);
         $foto = $_FILES["foto"]["name"];
-    }
-
-    // Wenn kein Image gesetzt, dann Platzhalter
-    if ($foto == "") {
+    } else if ($foto == "") {
+        // Wenn kein Image gesetzt, dann Platzhalter
         $foto = "noimage.PNG";
     }
 
     // Produkt speichern
-    $statement = $pdo->prepare("INSERT INTO products (name, title, description, categoryid, details, price, image, ean) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $sql = "INSERT INTO products (name, title, description, categoryid, details, price, image, ean) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $statement = $pdo->prepare($sql);
     $statement->execute(
         array($name, $title, $description, $categoryid, $details, $price, $foto, $ean)
     );
