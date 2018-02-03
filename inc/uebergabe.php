@@ -145,31 +145,31 @@ if ($_GET["page"] == "order" && !empty($_POST)) {
 // Produktbewertungen speichern
 if(isset($_GET["page"]) && $_GET["page"] == "addcomment") {
 
-    $id = $_GET["id"];
+    $productId = $_GET["id"];
     $name = htmlentities($_POST["name"]);
     $rating = htmlentities($_POST["rating"]);
     $comment = htmlentities($_POST["comment"]);
 
     $statement = $pdo->prepare("INSERT INTO ratings (productid, name, rating, comment) VALUES (?, ?, ?, ?)");
     $statement->execute(
-        array($id, $name, $rating, $comment)
-    ) or die(print_r($statement->errorInfo(), true));
+        array($productId, $name, $rating, $comment)
+    ) or die(print_r($statement->errorInfo(), true)); //gibt fehler an, "die" bricht ab, damit nicht zurückgeleitet wird auf Produkt
 
     header("Location: ./?product=".$id);
 }
 
 // Kontaktformular absenden
 if (isset($_GET["page"]) && $_GET["page"] == "contactform" && !empty($_POST)) {
-    $dest_name = htmlentities($_POST["name"]);
-    $dest_email = htmlentities($_POST["email"]);
-    $dest_subject = htmlentities($_POST["subject"]);
-    $dest_message = htmlentities($_POST["message"]);
+    $name = htmlentities($_POST["name"]);
+    $email = htmlentities($_POST["email"]);
+    $subject = htmlentities($_POST["subject"]);
+    $message = htmlentities($_POST["message"]);
 
     $to = "nina.ga.contact@gmail.com";
-    $header = "From: ".$dest_email;
+    $header = "From: ".$email;
 
-    mail($to, $dest_subject, $dest_message, $header);
-    header("Location: ./?page=mailsent");
+    mail($to, $subject, $message, $header); //to subject und message werden erwartet, header optional
+    header("Location: ./?page=mailsent"); //Browser umleiten
 }
 
 ?>

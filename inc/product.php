@@ -3,7 +3,7 @@ $sql = 'SELECT * FROM products WHERE products.id = ?';
 $prepared = $pdo->prepare($sql);
 
 $prepared->execute(array(
-    $_GET["product"]
+    $_GET["product"] // holt id vom product aus der URL, die von der category aufgerufen wurde
 ));
 $product = $prepared->fetch(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
 ?>
@@ -12,7 +12,7 @@ $product = $prepared->fetch(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen 
         <h1 class="h3"><?=$product["name"];?></h1>
     </div>
     <div class="col-12 col-md-6">
-        <img class="w-100" src="<?="images/products/".$product["image"];?>">
+        <img class="w-100" src="<?="images/products/".$product["image"]; /* in DB ist nur der Dateiname gespeichert */ ?>">
     </div>
     <div class="col-12 col-md-6 align-self-center">
         <div class="row justify-content-start">
@@ -42,20 +42,21 @@ $product = $prepared->fetch(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen 
                 ));
                 $ratings = $prepared->fetchAll(PDO::FETCH_ASSOC);
 
-                $ratingCounter = 0;
-                $stars = 0;
+                $ratingCounter = 0; // Anzahl aller Ratings
+                $stars = 0; // Stars -> alle Sterne die insgesamt vergeben wurden in allen Ratings
                 foreach($ratings as $rating) {
-                    $stars = $stars + $rating["rating"];
+                    $stars = $stars + $rating["rating"]; // 0 + Anzahl aus der Datenbank z.B. 5 = 5 $stars hat nach erstem Durchgang wert 5
                     $ratingCounter = $ratingCounter + 1;
                 }
+
                 if ($ratingCounter > 0) {
-                    $rating = round($stars / $ratingCounter);
+                    $average = round($stars / $ratingCounter);
                     echo "Rating: ";
-                    for ($i = 0; $i < $rating; $i++) {
+                    for ($i = 0; $i < $average; $i++) {
                         echo "<img src=\"images/star.png\" />";
                     }
 
-                    $grayStars = 5 - $rating;
+                    $grayStars = 5 - $average; //unausgefüllte sterne
 
                     for ($i = 0; $i < $grayStars; $i++) {
                         echo "<img src=\"images/star.png\" style=\"opacity:0.4;\" />";
