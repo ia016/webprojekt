@@ -24,7 +24,7 @@ if (isset($_GET["action"])) {
         $amount = $_POST["amount"];
         $productId = $_GET["productid"];
 
-        // Ist Produkt schon in Warenkorb? Anzahl erhöhen
+        // Ist Produkt schon in Warenkorb?
         $statement = $pdo->prepare("SELECT * FROM shoppingbag WHERE productsid = ? AND sessionid = ?");
         $statement->execute(
             array($productId, $sessionId)

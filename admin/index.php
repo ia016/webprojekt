@@ -2,6 +2,22 @@
 
 include("../inc/uebergabe.php");
 
+
+// immer prüfen, ob der User eingeloggt ist. standardannahme: user ist nicht eingeloggt
+$sql = "SELECT * FROM users WHERE session = ?";
+$prepared = $pdo->prepare($sql);
+$prepared->execute(array(
+    session_id()
+));
+$user = $prepared->fetch(PDO::FETCH_ASSOC);
+
+if ($user) {
+    $loggedin = true;
+} else {
+    $loggedin = false;
+}
+
+
 // user loggt sich ein: Form wird abgesendet (1)
 if (isset($_GET['login'])) {
 
@@ -29,7 +45,7 @@ if (isset($_GET['login'])) {
             $user["name"]
         ));
         // wenn login erfolgreich (6)
-        header("Location: ./");
+        header("Location: ./?manage=orders");
     }
 
 }
@@ -40,26 +56,10 @@ if (isset($_GET["logout"])) {
     header("Location: ./");
 }
 
-// immer prüfen, ob der User eingeloggt ist. standardannahme: user ist nicht eingeloggt
-$loggedin = false;
-
-$sql = "SELECT * FROM users WHERE session = ?";
-$prepared = $pdo->prepare($sql);
-$prepared->execute(array(
-    session_id()
-));
-$user = $prepared->fetch(PDO::FETCH_ASSOC);
-
-if ($user) {
-    $loggedin = true;
-}
-
 
 // order-seite als erstes anzeigen
-if (isset($_GET["manage"])) {
+if ($loggedin && isset($_GET["manage"])) {
     $manage = $_GET["manage"];
-} else {
-    header("Location: ?manage=orders");
 }
 
 
@@ -283,26 +283,25 @@ if (isset($_GET["deleteuser"])) {
 <hr/>
 
 <?php if (!$loggedin) : ?>
-<div id="login">
-    <?php if (!empty($_POST)) : ?>
-        <p class="error">
-            Login failed. Please try again
-        </p>
-    <?php endif; ?>
+    <div id="login">
 
-    <form action="./?login=1" method="post">
-        name:<br>
-        <input type="name" size="40" maxlength="250" name="name"><br><br>
+        <?php if (!empty($_POST)) : ?>
+            <p class="error">
+                Login failed. Please try again
+            </p>
+        <?php endif; ?>
 
-        Password:<br>
-        <input type="password" size="40" maxlength="250" name="password"><br>
+        <form action="./?login=1" method="post">
+            name:<br>
+            <input type="name" size="40" maxlength="250" name="name"><br><br>
 
-        <input type="submit" value="Abschicken">
-    </form>
-</div>
+            Password:<br>
+            <input type="password" size="40" maxlength="250" name="password"><br>
 
+            <input type="submit" value="Abschicken">
+        </form>
+    </div>
 <?php else : ?>
-
     <div id="main">
         <div id="navigation">
             <ul>
@@ -339,8 +338,6 @@ if (isset($_GET["deleteuser"])) {
 
         </div>
     </div>
-
-
 <?php endif; ?>
 
 

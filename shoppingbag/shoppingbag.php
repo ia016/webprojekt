@@ -1,4 +1,4 @@
-<h1>Warenkorb</h1>
+<h1>Shopping Bag</h1>
 <hr/>
 
 <?php
@@ -15,14 +15,14 @@
 
     if (!empty($products)) {
 ?>
-<div class="row justify-content-between">
+<div class="row">
     <div class="table-responsive">
         <table class="table table-striped">
             <th>Name</th>
             <th>Categroy</th>
             <th>Title</th>
             <th>Description</th>
-            <th style="min-width: 130px;">Preis / Stück</th>
+            <th style="min-width: 130px;">Price / Piece</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Remove</th>
@@ -40,10 +40,10 @@
                 echo "</form>";
                 echo "</td>";
                 echo "<td>".number_format($product["total"], 2)."€"."</td>";
-                echo "<td><a href=\"?removefromshoppingbag=".$product["shoppingbag_id"]."\">entfernen</a></td>";
+                echo "<td><a href=\"?removefromshoppingbag=".$product["shoppingbag_id"]."\">remove</a></td>";
                 echo "</tr>";
                 }
-                echo "<tr><td>Summe</td><td align='right' colspan='6'>".number_format($totalSum[0]["totalSum"], 2)." €"."</td><td></td></tr>"
+                echo "<tr><td>Total</td><td align='right' colspan='6'>".number_format($totalSum[0]["totalSum"], 2)." €"."</td><td></td></tr>"
             ?>
         </table>
     </div>
