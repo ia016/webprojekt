@@ -21,10 +21,10 @@
 			<label for="category">Kategorie</label>
 			<select id="category" name="category" class="form-control">
                 <?php
-                foreach($allCategories as $category) {
-                    echo "<option value=\"".$category["id"]."\">".$category["name"]."</option>";
-                }
-                ?>
+				foreach($allCategories as $category) {
+					echo "<option value=\"".$category["id"]."\">".$category["name"]."</option>";
+				}
+				?>
 			</select>
 		</div>
 		<div class="form-group col-4">

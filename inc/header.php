@@ -10,20 +10,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="mx-auto navbar-nav mr-auto">
+                <ul class="mx-auto navbar-nav">
                 <?php
                     $sql = 'SELECT * FROM categories ORDER BY id';
                     $prepared = $pdo->prepare($sql);
                     $prepared->execute();
-                    $categories = $prepared->fetchAll(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen - fetch all holt alles in assoziat. Array
-
+                    $categories = $prepared->fetchAll(PDO::FETCH_ASSOC); //Kategorien werden geholt und im array ausgegeben
 
                     foreach($categories as $category) {
-                        if (isset($_GET["category"]) && $_GET["category"] == $category["id"]) {
-                            echo "<li class='nav-item active'><a class='nav-link' href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>\n";
-                        } else {
-                            echo "<li class='nav-item'><a class='nav-link' href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>\n";
-                        }
+                        echo "<li class='nav-item'><a class='nav-link' href=\"index.php?category=".$category["id"]."\">".$category["name"]."</a></li>\n";
                     }
                 ?>
                 <li class='nav-item'>

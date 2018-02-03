@@ -89,16 +89,11 @@ IMG.footer:hover {
 
  }
 
- .img-100 {
-     width: 100% !important; /*View Width*/
- }
-
 .img-80 {
     width: 79% !important; /*View Width*/
     display: block;
     margin-left: auto;
     margin-right: auto
-
 }
 
 figcaption {
