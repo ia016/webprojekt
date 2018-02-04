@@ -56,19 +56,7 @@ if (isset($_GET["logout"])) {
     header("Location: ./");
 }
 
-// immer prüfen, ob der User eingeloggt ist. standardannahme: user ist nicht eingeloggt
-$loggedin = false;
 
-$sql = "SELECT * FROM users WHERE session = ?";
-$prepared = $pdo->prepare($sql);
-$prepared->execute(array(
-    session_id()
-));
-$user = $prepared->fetch(PDO::FETCH_ASSOC);
-
-if ($user) {
-    $loggedin = true;
-}
 
 
 // order-seite als erstes anzeigen

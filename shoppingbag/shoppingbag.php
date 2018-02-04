@@ -23,7 +23,7 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <th>Name</th>
-            <th>Categroy</th>
+            <th>Category</th>
             <th>Title</th>
             <th>Description</th>
             <th style="min-width: 130px;">Price / Piece</th>
