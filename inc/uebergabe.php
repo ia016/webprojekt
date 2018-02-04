@@ -155,7 +155,7 @@ if(isset($_GET["page"]) && $_GET["page"] == "addcomment") {
         array($productId, $name, $rating, $comment)
     ) or die(print_r($statement->errorInfo(), true)); //gibt fehler an, "die" bricht ab, damit nicht zurückgeleitet wird auf Produkt
 
-    header("Location: ./?product=".$id);
+    header("Location: ./?product=".$productId);
 }
 
 // Kontaktformular absenden
