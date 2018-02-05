@@ -24,6 +24,7 @@
 				foreach($allCategories as $category) {
 					echo "<option value=\"".$category["id"]."\">".$category["name"]."</option>";
 				}
+
 				?>
 			</select>
 		</div>
