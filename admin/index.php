@@ -21,7 +21,7 @@ if ($user) {
 // user loggt sich ein: Form wird abgesendet (1)
 if (isset($_GET['login'])) {
 
-    // Ruft die Login Form auf mit login=1 (GET)--> Daten, die im Formular eingegeben werden mit POST holen (2)
+    // Ruft die Login Form auf mit login=1 (GET)--> Daten, die im Formular eingegeben werden, werden mit post übermittelt (2)
     $name = $_POST["name"];
     $password = $_POST['password'];
 
@@ -280,7 +280,8 @@ if (isset($_GET["deleteuser"])) { //deleteuser ist die id die über die URL übe
 <h1 class="mylovelyhome"><a href="index.php">my lovely home</a></h1>
 <hr/>
 
-<?php if (!$loggedin) : ?>
+<?php if (!$loggedin) :
+    // Wenn User nicht eingeloggt ist und name/password nicht leer sind, dann errror und formular ?>
 <div id="login">
     <?php if (!empty($_POST)) : ?>
         <p class="error">
