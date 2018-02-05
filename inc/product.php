@@ -25,7 +25,7 @@ $product = $prepared->fetch(PDO::FETCH_ASSOC); //sql vorbereiten und ausführen 
                 <p class="col-12">
                 <ul>
                     <?php
-                    $details = explode(", ", $product["details"]);
+                    $details = explode(", ", $product["details"]); //delimiter teilt String anhand einer Zeichenkette
                     foreach ($details AS $detail) {
                         echo "<li>".$detail."</li>";
                     }

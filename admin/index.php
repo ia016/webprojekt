@@ -106,7 +106,7 @@ if (isset($_GET["editcategory"]) && !empty($_POST)) {
     header("Location: ?manage=categories");
 }
 
-// Kategorien holen (fürs Hinzufügen von Produkten) -> irmi
+// Kategorien holen (fürs Hinzufügen von Produkten)
 $sql = "SELECT * FROM categories";
 $prepared = $pdo->prepare($sql);
 $prepared->execute(array());

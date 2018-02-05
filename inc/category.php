@@ -15,7 +15,7 @@
     echo "</div></div>";
 
     foreach ($products as $product) {
-        echo "<div class=\"new-release mt-4 col-12 col-sm-6 col-lg-3\">"; //new-release- selber gemacht 
+        echo "<div class=\"new-release mt-4 col-12 col-sm-6 col-lg-3\">"; //new-release - kein Bootstrap
         echo "<a href=\"index.php?product=".$product["id"]."\">"; // Produkt wird auf der Seite verlinkt
         echo "<div class=\"card img-container\">";
         echo "<div class=\"overlay\"><div>Show</div></div>";
