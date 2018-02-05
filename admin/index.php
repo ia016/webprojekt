@@ -122,9 +122,9 @@ if (isset($_GET["addproduct"])) {
     $price = $_POST["price"];
     $ean = $_POST["ean"];
 
-    // bild hochladen
+    // Bild hochladen
     if ($_FILES["foto"]["name"]  !== "") {
-        move_uploaded_file($_FILES['foto']['tmp_name'],  "./../images/products/".$_FILES["foto"]["name"]);
+        move_uploaded_file($_FILES['foto']['tmp_name'], './../images/products/'.$_FILES["foto"]["name"]);
         $foto = $_FILES["foto"]["name"];
     } else if ($foto == "") {
         // Wenn kein Image gesetzt, dann Platzhalter
