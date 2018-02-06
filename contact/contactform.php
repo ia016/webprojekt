@@ -1,6 +1,6 @@
 <div>
     <h2 class="überschriftenFooter col-12"> Contact form</h2>
-    <form class="form-control justify-content-center col-12" action="?page=contactform" method="post"> <!-- wohin wird das übergeben? -->
+    <form class="form-control justify-content-center col-12" action="?page=contactform" method="post">
         Name: <br />
         <input class="form-control" type name="name" /><br />
         E-Mail: <br />

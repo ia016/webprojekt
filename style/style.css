@@ -95,7 +95,7 @@ IMG.footer:hover {
     margin-left: auto;
     margin-right: auto
 }
-
+/* Aboutseite Bilderunterschriften */
 figcaption {
     text-align: center;
     font-size: large;
@@ -119,12 +119,12 @@ figcaption {
      font-weight: lighter;
      text-transform: uppercase;
  }
-
+/*about seite text*/
  .teamtext {
      text-align:center;
      font-size: 20px;
  }
-
+/*about seite icon*/
  .icon {
      width:20px;
      height: 20px;
@@ -135,7 +135,7 @@ figcaption {
      padding: 10px;
      background-color: #9cbab4;
  }
-
+/*design von allen wichtigen buttons*/
  .btn-primary {
      border-color: #9cbab4;
      color: black;
@@ -147,7 +147,7 @@ figcaption {
     color: black;
     background-color: grey;
 }
-
+/* Headerbild für die Kategorien  */
  .category-header {
      display: flex;
      justify-content: center;
