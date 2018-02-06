@@ -128,7 +128,7 @@ if (isset($_GET["addproduct"])) {
         $foto = $_FILES["foto"]["name"];
     } else if ($foto == "") {
         // Wenn kein Image gesetzt, dann Platzhalter
-        $foto = "noimage.PNG";
+        $foto = "../images/products/noimage.png";
     }
 
     // Produkt speichern
